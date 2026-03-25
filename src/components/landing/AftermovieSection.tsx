@@ -13,7 +13,7 @@ const AftermovieSection = () => (
     <div className="relative mx-auto w-full overflow-hidden rounded-xl shadow-[0_8px_32px_hsl(264_100%_50%/0.2)] md:max-w-[720px]">
       <iframe
         src="https://www.youtube.com/embed/UplfOpXtNok"
-        title="SwimPros Camp Aftermovie"
+        title="Swimpros Camp Aftermovie"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         className="aspect-video w-full"

@@ -20,7 +20,7 @@ const Index = () => (
     <CampsSection />
     <FinalCTA />
     <footer className="bg-surface-darker px-5 py-8 text-center text-xs text-primary-foreground/20">
-      © 2026 SwimPros. All rights reserved. | Tenerife, Spain
+      © 2026 Swimpros. All rights reserved. | Tenerife, Spain
     </footer>
   </div>
 );
