@@ -67,6 +67,8 @@ const pillars: Pillar[] = [
     images: [
       { src: flume1, alt: "Swimmer in the flume channel" },
       { src: flume2, alt: "Swimmer at Tenerife Top Training flume" },
+      { src: flume3, alt: "Underwater video analysis in the flume" },
+      { src: flume4, alt: "Tenerife Top Training flume facility" },
     ],
   },
   {
