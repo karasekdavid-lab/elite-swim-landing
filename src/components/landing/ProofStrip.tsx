@@ -23,7 +23,7 @@ const ProofStrip = () => {
 
   return (
     <div className="bg-accent px-5 py-6 md:px-10 md:py-8">
-      <div className="mx-auto max-w-sm">
+      <div className="mx-auto max-w-md">
         <div className="relative overflow-hidden rounded-xl">
           <div
             className="flex transition-transform duration-500 ease-in-out"
