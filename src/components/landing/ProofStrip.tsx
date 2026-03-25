@@ -1,34 +1,29 @@
 import { useState, useEffect } from "react";
+import wa1 from "@/assets/whatsapp1.png";
+import wa2 from "@/assets/whatsapp2.png";
+import wa3 from "@/assets/whatsapp3.png";
+import wa4 from "@/assets/whatsapp4.png";
 
-// Add your WhatsApp testimonial screenshots here
-const testimonialImages: { src: string; alt: string }[] = [
-  // { src: importedImage, alt: "WhatsApp testimonial from parent" },
+const testimonialImages = [
+  { src: wa1, alt: "WhatsApp testimonial from a parent thanking the coaching team" },
+  { src: wa2, alt: "WhatsApp testimonial thanking the camp for great training" },
+  { src: wa3, alt: "WhatsApp testimonial praising the top camp experience" },
+  { src: wa4, alt: "WhatsApp testimonial from parents grateful for the camp" },
 ];
 
 const ProofStrip = () => {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    if (testimonialImages.length <= 1) return;
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % testimonialImages.length);
-    }, 4000);
+    }, 3000);
     return () => clearInterval(timer);
   }, []);
 
-  if (testimonialImages.length === 0) {
-    return (
-      <div className="bg-accent px-5 py-8 text-center">
-        <p className="text-sm font-semibold text-accent-foreground/60">
-          WhatsApp testimonial screenshots coming soon…
-        </p>
-      </div>
-    );
-  }
-
   return (
     <div className="bg-accent px-5 py-6 md:px-10 md:py-8">
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto max-w-sm">
         <div className="relative overflow-hidden rounded-xl">
           <div
             className="flex transition-transform duration-500 ease-in-out"
@@ -45,19 +40,17 @@ const ProofStrip = () => {
           </div>
         </div>
 
-        {testimonialImages.length > 1 && (
-          <div className="mt-3 flex justify-center gap-2">
-            {testimonialImages.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                className={`h-2 rounded-full transition-all ${
-                  i === current ? "w-6 bg-primary" : "w-2 bg-accent-foreground/25"
-                }`}
-              />
-            ))}
-          </div>
-        )}
+        <div className="mt-3 flex justify-center gap-2">
+          {testimonialImages.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className={`h-2 rounded-full transition-all ${
+                i === current ? "w-6 bg-primary" : "w-2 bg-accent-foreground/25"
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
