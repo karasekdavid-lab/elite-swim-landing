@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import heroImg from "@/assets/hero.png";
 import heroImg2 from "@/assets/hero2.png";
+import heroImg3 from "@/assets/hero3.png";
 
 const heroImages = [
   { src: heroImg, alt: "SwimPros coaching team at the pool in Tenerife" },
   { src: heroImg2, alt: "Tenerife Top Training swimming facility at sunset" },
+  { src: heroImg3, alt: "SwimPros group photo with all swimmers" },
 ];
 
 const HeroSection = () => {
