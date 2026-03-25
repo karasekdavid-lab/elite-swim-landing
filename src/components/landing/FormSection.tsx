@@ -141,11 +141,24 @@ const FormSection = () => {
               <label className="mb-1 flex flex-wrap items-center gap-1.5 text-[13px] font-semibold text-foreground/80">
                 <span>💬</span> WhatsApp number <span className="font-normal text-muted-foreground">- this is how Yul's team will reach you</span>
               </label>
-              <input
-                type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleChange}
-                placeholder="+44 7700 900123"
-                className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
-              />
+              <div className="flex gap-2">
+                <select
+                  value={countryCode}
+                  onChange={(e) => setCountryCode(e.target.value)}
+                  className="w-[110px] shrink-0 rounded-lg border-2 border-border bg-muted px-2 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                >
+                  {COUNTRY_CODES.map((c) => (
+                    <option key={c.code + c.name} value={c.code}>
+                      {c.flag} {c.code}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleChange}
+                  placeholder="7700 900123"
+                  className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                />
+              </div>
             </div>
 
             <Field label="Email address" name="email" type="email" placeholder="your@email.com" value={formData.email} onChange={handleChange} />
