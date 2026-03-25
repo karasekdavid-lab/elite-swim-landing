@@ -1,52 +1,64 @@
 const camps = [
-  {
-    date: "AUG 4-14, 2026",
-    title: "Summer Camp 1",
-    location: "Tenerife, Spain",
-    imgLabel: "Photo: Pool / Tenerife",
-    imgHint: "Training facility or resort view",
-  },
-  {
-    date: "AUG 17-27, 2026",
-    title: "Summer Camp 2",
-    location: "Tenerife, Spain",
-    imgLabel: "Photo: Camp Action Shot",
-    imgHint: "Swimmers in action or group photo",
-  },
+  { name: "Summer Camp 1", dates: "Aug 4 – 14", year: "2026", tag: "FILLING FAST", tagColor: "destructive" as const },
+  { name: "Summer Camp 2", dates: "Aug 17 – 27", year: "2026", tag: "FILLING FAST", tagColor: "destructive" as const },
+  { name: "October Camp", dates: "Oct 24 – Nov 1", year: "2026", tag: "NEW", tagColor: "primary" as const },
+  { name: "New Year's Camp", dates: "Dec 26 – Jan 4", year: "2026/27", tag: "NEW", tagColor: "primary" as const },
 ];
 
 const CampsSection = () => (
-  <section className="bg-muted px-5 py-14 md:px-10 md:py-20">
-    <span className="mb-3 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary">
-      Upcoming Camps
-    </span>
-    <h2 className="mb-6 font-heading text-[26px] font-extrabold leading-tight text-foreground md:text-4xl">
-      Next Available Camps
-    </h2>
+  <section className="bg-gradient-to-b from-hero-bg via-hero-mid to-hero-deep px-5 py-14 md:px-10 md:py-20">
+    <div className="mx-auto max-w-3xl text-center">
+      <span className="mb-3 inline-block rounded-full bg-primary-foreground/10 px-3 py-1 text-xs font-bold uppercase tracking-[2px] text-primary">
+        Upcoming Camps
+      </span>
+      <h2 className="mb-2 font-heading text-[26px] font-extrabold leading-tight text-primary-foreground md:text-4xl">
+        Train in <span className="text-accent">Tenerife</span>, Spain
+      </h2>
+      <p className="mb-10 text-sm text-primary-foreground/40">
+        World-class facilities. Year-round sunshine. All camps at Tenerife Top Training.
+      </p>
 
-    <div className="grid gap-4 md:grid-cols-2">
-      {camps.map((c, i) => (
-        <div key={i} className="overflow-hidden rounded-[14px] border border-border bg-background">
-          <div className="flex aspect-video flex-col items-center justify-center border-b border-border bg-gradient-to-br from-primary/10 to-primary/20">
-            <span className="text-[11px] font-semibold uppercase tracking-wide text-primary/55">{c.imgLabel}</span>
-            <span className="mt-1 text-[10px] text-primary/35">{c.imgHint}</span>
-          </div>
-          <div className="p-5">
-            <span className="mb-2 inline-block rounded bg-accent px-2.5 py-0.5 text-[11px] font-bold text-accent-foreground">
-              {c.date}
-            </span>
-            <h3 className="mb-1 font-heading text-[17px] font-bold text-foreground">{c.title}</h3>
-            <p className="mb-3 text-[13px] text-muted-foreground">{c.location}</p>
-            <p className="mb-3.5 text-xs font-semibold text-destructive">🔥 Almost Full</p>
-            <a
-              href="#form"
-              className="block w-full rounded-lg bg-secondary py-3 text-center font-heading text-sm font-bold text-secondary-foreground transition-opacity hover:opacity-90"
+      <div className="grid gap-3 md:grid-cols-2">
+        {camps.map((c, i) => (
+          <a
+            key={i}
+            href="#form"
+            className="group relative overflow-hidden rounded-2xl border border-primary-foreground/10 bg-surface-dark p-6 text-left transition-all hover:border-primary/40 hover:shadow-[0_0_30px_hsl(264_100%_50%/0.15)]"
+          >
+            {/* Tag */}
+            <span
+              className={`mb-3 inline-block rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
+                c.tagColor === "destructive"
+                  ? "bg-destructive/20 text-destructive"
+                  : "bg-primary/20 text-primary"
+              }`}
             >
-              LEARN MORE →
-            </a>
-          </div>
-        </div>
-      ))}
+              {c.tag}
+            </span>
+
+            <h3 className="mb-1 font-heading text-lg font-bold text-primary-foreground group-hover:text-accent transition-colors">
+              {c.name}
+            </h3>
+
+            <div className="mb-4 flex items-baseline gap-2">
+              <span className="text-2xl font-heading font-extrabold text-primary-foreground/90">{c.dates}</span>
+              <span className="text-sm font-semibold text-primary-foreground/30">{c.year}</span>
+            </div>
+
+            <div className="flex items-center gap-2 text-xs font-semibold text-primary/80 group-hover:text-primary transition-colors">
+              <span>Reserve your spot</span>
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </div>
+
+            {/* Decorative corner glow */}
+            <div className="absolute -bottom-8 -right-8 h-24 w-24 rounded-full bg-primary/5 transition-all group-hover:bg-primary/10" />
+          </a>
+        ))}
+      </div>
+
+      <p className="mt-6 text-xs text-primary-foreground/25">
+        🌴 10 days of elite training per camp · Limited to 30 swimmers
+      </p>
     </div>
   </section>
 );
