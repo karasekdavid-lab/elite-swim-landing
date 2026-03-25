@@ -1,3 +1,5 @@
+import heroImg from "@/assets/hero.png";
+
 const HeroSection = () => {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-hero-bg via-hero-mid to-hero-deep px-5 py-12 text-center md:px-10 md:py-20">
