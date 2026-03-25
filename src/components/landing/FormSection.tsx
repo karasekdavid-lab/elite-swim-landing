@@ -82,7 +82,7 @@ const FormSection = () => {
           whatsapp: `${countryCode}${formData.whatsapp}`,
         }),
       });
-      setSubmitted(true);
+      window.location.href = "https://www.swimpros.com/successful";
     } catch (err) {
       console.error("Webhook error:", err);
       alert("Something went wrong. Please try again.");
