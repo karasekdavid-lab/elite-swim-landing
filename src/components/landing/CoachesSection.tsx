@@ -23,9 +23,9 @@ const CoachesSection = () => (
       The Team
     </span>
     <h2 className="mb-3.5 font-heading text-[26px] font-extrabold leading-tight text-secondary-foreground md:text-4xl">
-      Meet Your Coaches
+      Meet Your Head Coaches
     </h2>
-    <p className="mb-6 text-sm text-secondary-foreground/40">The people who'll be working with your swimmer</p>
+    <p className="mb-6 text-sm text-secondary-foreground/40">we're excited to meet you!!</p>
 
     <div className="grid gap-4 md:grid-cols-2">
       {coaches.map((c, i) => (
