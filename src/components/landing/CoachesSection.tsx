@@ -7,6 +7,7 @@ const coaches = [
     role: "Head Coach",
     desc: "Gets in the water with every swimmer. Coached alongside Olympic medalists. Turns potential into race-day results.",
     img: yulImg,
+    objectPosition: "75% 65%",
   },
   {
     name: "David Karasek",
