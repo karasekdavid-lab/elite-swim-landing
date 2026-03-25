@@ -1,3 +1,5 @@
+import heroImg from "@/assets/hero.png";
+
 const HeroSection = () => {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-hero-bg via-hero-mid to-hero-deep px-5 py-12 text-center md:px-10 md:py-20">
@@ -19,14 +21,9 @@ const HeroSection = () => {
           Elite coaching, flume channel analysis, and daily mental training to help competitive swimmers aged 10-18 break through plateaus.
         </p>
 
-        {/* Hero image placeholder */}
-        <div className="mx-auto mb-7 flex aspect-[16/10] max-w-2xl flex-col items-center justify-center rounded-xl border-2 border-dashed border-primary-foreground/20 bg-gradient-to-br from-surface-dark to-hero-deep">
-          <span className="rounded-md bg-secondary/60 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-primary-foreground/50">
-            Photo: Hero Image
-          </span>
-          <span className="mt-1.5 text-[11px] text-primary-foreground/30">
-            Swimmers training in the pool / Yul coaching in the water
-          </span>
+        {/* Hero image */}
+        <div className="mx-auto mb-7 max-w-2xl overflow-hidden rounded-xl">
+          <img src={heroImg} alt="SwimPros coaching team at the pool in Tenerife" className="h-auto w-full object-cover" />
         </div>
 
         <a
