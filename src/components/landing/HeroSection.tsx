@@ -35,7 +35,7 @@ const HeroSection = () => {
         </h1>
 
         <p className="mx-auto mb-7 max-w-xl text-base leading-relaxed text-primary-foreground/70 md:text-lg">
-          Elite coaching, flume channel analysis, and daily mental training to help competitive swimmers aged 10-18 break through plateaus.
+          Elite coaching, flume channel analysis, and daily confidence training to help competitive swimmers break through plateaus.
         </p>
 
         {/* Hero image carousel */}
