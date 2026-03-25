@@ -60,6 +60,7 @@ const FormSection = () => {
   const [formData, setFormData] = useState({
     parentName: "", swimmerName: "", swimmerAge: "", goal: "", struggle: "", whatsapp: "", email: "",
   });
+  const [countryCode, setCountryCode] = useState("+44");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
