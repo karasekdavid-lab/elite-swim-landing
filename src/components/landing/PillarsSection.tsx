@@ -92,7 +92,7 @@ const pillars: Pillar[] = [
   {
     icon: "🏊",
     title: "Olympic-Level Coaching",
-    desc: "Head coach Yul doesn't watch from the deck. He gets in the water. He's coached alongside world record holder Milorad Cavic and treats every swimmer like they're headed to Olympic trials.",
+    desc: "The coaches don't watch from the deck only. They get in the water. The head coaches Yul Münger & David Karasek run a team that is powered by WR Holders Peter Mankoc and Milorad Cavic, Rebecca Karasek who's our injury prevention & mobility expert, plus special guests! We treat every swimmer like they're going to Olympic trials this year.",
     images: [
       { src: coaching1, alt: "Coach Yul watching swimmers from the deck" },
       { src: coaching2, alt: "Yul coaching swimmers poolside" },
