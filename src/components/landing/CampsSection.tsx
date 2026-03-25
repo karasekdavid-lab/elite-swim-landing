@@ -1,8 +1,8 @@
 const camps = [
   { name: "Summer Camp 1", dates: "Aug 4 – 14", year: "2026", tag: "FILLING FAST", tagColor: "destructive" as const, highlight: "" },
   { name: "Summer Camp 2", dates: "Aug 17 – 27", year: "2026", tag: "FILLING FAST", tagColor: "destructive" as const, highlight: "⭐ Guest coaches: WR holders Peter Mankoč & Milorad Čavić — all 10 days" },
-  { name: "October Camp", dates: "Oct 24 – Nov 1", year: "2026", tag: "NEW", tagColor: "primary" as const },
-  { name: "New Year's Camp", dates: "Dec 26 – Jan 4", year: "2026/27", tag: "NEW", tagColor: "primary" as const },
+  { name: "October Camp", dates: "Oct 24 – Nov 1", year: "2026", tag: "NEW", tagColor: "primary" as const, highlight: "" },
+  { name: "New Year's Camp", dates: "Dec 26 – Jan 4", year: "2026/27", tag: "NEW", tagColor: "primary" as const, highlight: "" },
 ];
 
 const CampsSection = () => (
