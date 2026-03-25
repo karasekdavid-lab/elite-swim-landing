@@ -24,7 +24,7 @@ const AutoCarousel = ({ images, interval = 3500 }: { images: { src: string; alt:
   }, [images.length, interval]);
 
   return (
-    <div className="relative mb-3.5 aspect-[3/2] overflow-hidden rounded-lg">
+    <div className="relative mb-3.5 aspect-[4/3] overflow-hidden rounded-lg">
       <div
         className="flex h-full transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${current * 100}%)` }}
