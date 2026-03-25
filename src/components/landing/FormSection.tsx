@@ -138,8 +138,7 @@ const FormSection = () => {
               </div>
 
               <form className="space-y-4" onSubmit={handleSubmit}>
-                <Field label="Your first name" name="parentName" type="text" placeholder="e.g. Sarah" value={formData.parentName} onChange={handleChange} />
-                <Field label="Your swimmer's first name" name="swimmerName" type="text" placeholder="e.g. Emma" value={formData.swimmerName} onChange={handleChange} />
+                <Field label="Your full name" name="parentName" type="text" placeholder="e.g. Sarah Johnson" value={formData.parentName} onChange={handleChange} />
                 <Field label="Your swimmer's age" name="swimmerAge" type="number" placeholder="e.g. 14" value={formData.swimmerAge} onChange={handleChange} />
 
                 <div>
