@@ -1,4 +1,6 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
+
+const GHL_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/6FMzWKJETHi9LlgCsxFy/webhook-trigger/2e41dec7-eac2-4369-bfe6-493b1aeb708a";
 
 const COUNTRY_CODES = [
   { code: "+44", flag: "🇬🇧", name: "UK" },
@@ -61,9 +63,32 @@ const FormSection = () => {
     parentName: "", swimmerName: "", swimmerAge: "", goal: "", struggle: "", whatsapp: "", email: "",
   });
   const [countryCode, setCountryCode] = useState("+44");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+    try {
+      await fetch(GHL_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          whatsapp: `${countryCode}${formData.whatsapp}`,
+        }),
+      });
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Webhook error:", err);
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -97,80 +122,93 @@ const FormSection = () => {
 
         {/* Form card */}
         <div className="rounded-2xl border-2 border-primary/15 bg-background p-7 shadow-[0_4px_30px_hsl(264_100%_50%/0.07),0_1px_3px_hsl(0_0%_0%/0.04)]">
-          <div className="mb-6 text-center">
-            <h3 className="font-heading text-lg font-bold text-foreground">Tell Us About Your Swimmer</h3>
-            <p className="mt-1 text-xs text-muted-foreground">Takes 60 seconds. Yul reviews every one personally.</p>
-          </div>
-
-          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-            <Field label="Your first name" name="parentName" type="text" placeholder="e.g. Sarah" value={formData.parentName} onChange={handleChange} />
-            <Field label="Your swimmer's first name" name="swimmerName" type="text" placeholder="e.g. Emma" value={formData.swimmerName} onChange={handleChange} />
-            <Field label="Your swimmer's age" name="swimmerAge" type="number" placeholder="e.g. 14" value={formData.swimmerAge} onChange={handleChange} />
-
-            <div>
-              <label className="mb-1 block text-[13px] font-semibold text-foreground/80">What's their #1 goal right now?</label>
-              <select
-                name="goal"
-                value={formData.goal}
-                onChange={handleChange}
-                className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
-              >
-                <option value="" disabled>Choose one...</option>
-                <option>Drop time / Get faster</option>
-                <option>Improve technique</option>
-                <option>Build race-day confidence</option>
-                <option>Qualify for a big meet</option>
-                <option>Other</option>
-              </select>
+          {submitted ? (
+            <div className="py-12 text-center">
+              <div className="mb-4 text-5xl">🎉</div>
+              <h3 className="mb-2 font-heading text-xl font-bold text-foreground">You're In!</h3>
+              <p className="text-sm text-muted-foreground">
+                Yul's team will reach out on WhatsApp within 10 minutes. Keep an eye on your phone!
+              </p>
             </div>
-
-            <div>
-              <label className="mb-1 block text-[13px] font-semibold text-foreground/80">
-                What's their biggest struggle? <span className="font-normal text-muted-foreground">(1-2 sentences)</span>
-              </label>
-              <textarea
-                name="struggle"
-                value={formData.struggle}
-                onChange={handleChange}
-                placeholder="e.g. She trains great but freezes up at meets..."
-                className="min-h-[80px] w-full resize-y rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
-              />
-            </div>
-
-            <div>
-              <label className="mb-1 flex flex-wrap items-center gap-1.5 text-[13px] font-semibold text-foreground/80">
-                <span>💬</span> WhatsApp number <span className="font-normal text-muted-foreground">- this is how Yul's team will reach you</span>
-              </label>
-              <div className="flex gap-2">
-                <select
-                  value={countryCode}
-                  onChange={(e) => setCountryCode(e.target.value)}
-                  className="w-[110px] shrink-0 rounded-lg border-2 border-border bg-muted px-2 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
-                >
-                  {COUNTRY_CODES.map((c) => (
-                    <option key={c.code + c.name} value={c.code}>
-                      {c.flag} {c.code}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleChange}
-                  placeholder="7700 900123"
-                  className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
-                />
+          ) : (
+            <>
+              <div className="mb-6 text-center">
+                <h3 className="font-heading text-lg font-bold text-foreground">Tell Us About Your Swimmer</h3>
+                <p className="mt-1 text-xs text-muted-foreground">Takes 60 seconds. Yul reviews every one personally.</p>
               </div>
-            </div>
 
-            <Field label="Email address" name="email" type="email" placeholder="your@email.com" value={formData.email} onChange={handleChange} />
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                <Field label="Your first name" name="parentName" type="text" placeholder="e.g. Sarah" value={formData.parentName} onChange={handleChange} />
+                <Field label="Your swimmer's first name" name="swimmerName" type="text" placeholder="e.g. Emma" value={formData.swimmerName} onChange={handleChange} />
+                <Field label="Your swimmer's age" name="swimmerAge" type="number" placeholder="e.g. 14" value={formData.swimmerAge} onChange={handleChange} />
 
-            <button
-              type="submit"
-              className="mt-1 w-full rounded-lg bg-primary py-4 font-heading text-base font-bold text-primary-foreground shadow-[0_4px_16px_hsl(264_100%_50%/0.2)] transition-transform hover:scale-[1.02]"
-            >
-              SEND MY SWIMMER'S PROFILE TO YUL →
-            </button>
-            <p className="text-center text-[11px] text-muted-foreground">No spam. No pressure. Just a coaching conversation about your swimmer.</p>
-          </form>
+                <div>
+                  <label className="mb-1 block text-[13px] font-semibold text-foreground/80">What's their #1 goal right now?</label>
+                  <select
+                    name="goal"
+                    value={formData.goal}
+                    onChange={handleChange}
+                    className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                  >
+                    <option value="" disabled>Choose one...</option>
+                    <option>Drop time / Get faster</option>
+                    <option>Improve technique</option>
+                    <option>Build race-day confidence</option>
+                    <option>Qualify for a big meet</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="mb-1 block text-[13px] font-semibold text-foreground/80">
+                    What's their biggest struggle? <span className="font-normal text-muted-foreground">(1-2 sentences)</span>
+                  </label>
+                  <textarea
+                    name="struggle"
+                    value={formData.struggle}
+                    onChange={handleChange}
+                    placeholder="e.g. She trains great but freezes up at meets..."
+                    className="min-h-[80px] w-full resize-y rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-1 flex flex-wrap items-center gap-1.5 text-[13px] font-semibold text-foreground/80">
+                    <span>💬</span> WhatsApp number <span className="font-normal text-muted-foreground">- this is how Yul's team will reach you</span>
+                  </label>
+                  <div className="flex gap-2">
+                    <select
+                      value={countryCode}
+                      onChange={(e) => setCountryCode(e.target.value)}
+                      className="w-[110px] shrink-0 rounded-lg border-2 border-border bg-muted px-2 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                    >
+                      {COUNTRY_CODES.map((c) => (
+                        <option key={c.code + c.name} value={c.code}>
+                          {c.flag} {c.code}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleChange}
+                      placeholder="7700 900123"
+                      className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <Field label="Email address" name="email" type="email" placeholder="your@email.com" value={formData.email} onChange={handleChange} />
+
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="mt-1 w-full rounded-lg bg-primary py-4 font-heading text-base font-bold text-primary-foreground shadow-[0_4px_16px_hsl(264_100%_50%/0.2)] transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
+                >
+                  {submitting ? "SENDING..." : "SEND MY SWIMMER'S PROFILE TO YUL →"}
+                </button>
+                <p className="text-center text-[11px] text-muted-foreground">No spam. No pressure. Just a coaching conversation about your swimmer.</p>
+              </form>
+            </>
+          )}
         </div>
       </div>
     </section>
