@@ -34,12 +34,12 @@ const AutoCarousel = ({ images, interval = 3500 }: { images: { src: string; alt:
         ))}
       </div>
       {images.length > 1 && (
-        <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-1.5">
+        <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2">
           {images.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`h-1.5 rounded-full transition-all ${i === current ? "w-4 bg-primary" : "w-1.5 bg-foreground/30"}`}
+              className={`h-2.5 rounded-full transition-all ${i === current ? "w-6 bg-primary" : "w-2.5 bg-foreground/40"}`}
               aria-label={`Slide ${i + 1}`}
             />
           ))}
