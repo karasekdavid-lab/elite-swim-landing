@@ -4,7 +4,7 @@ const AftermovieSection = () => (
       See It In Action
     </span>
     <h2 className="mb-2 font-heading text-2xl font-extrabold text-primary-foreground md:text-[32px]">
-      What <span className="text-primary">4 Days</span> at SwimPros Looks Like
+      What <span className="text-primary">10 Days</span> at Swimpros Looks Like
     </h2>
     <p className="mb-6 text-[15px] text-primary-foreground/65">
       28 competitive swimmers. 9 countries. 1 island. Hit play.
@@ -13,7 +13,7 @@ const AftermovieSection = () => (
     <div className="relative mx-auto w-full overflow-hidden rounded-xl shadow-[0_8px_32px_hsl(264_100%_50%/0.2)] md:max-w-[720px]">
       <iframe
         src="https://www.youtube.com/embed/UplfOpXtNok"
-        title="SwimPros Camp Aftermovie"
+        title="Swimpros Camp Aftermovie"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         className="aspect-video w-full"

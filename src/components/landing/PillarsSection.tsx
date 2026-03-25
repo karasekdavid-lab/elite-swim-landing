@@ -106,7 +106,7 @@ const pillars: Pillar[] = [
 const PillarsSection = () => (
   <section className="bg-muted px-5 py-14 md:px-10 md:py-20">
     <span className="mb-3 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary">
-      Why SwimPros
+      Why Swimpros
     </span>
     <h2 className="mb-3.5 font-heading text-[26px] font-extrabold leading-tight text-foreground md:text-4xl">
       This Is <span className="text-primary">Not</span> a Regular Swim Camp
