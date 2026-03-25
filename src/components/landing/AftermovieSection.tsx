@@ -4,7 +4,7 @@ const AftermovieSection = () => (
       See It In Action
     </span>
     <h2 className="mb-2 font-heading text-2xl font-extrabold text-primary-foreground md:text-[32px]">
-      What <span className="text-primary">4 Days</span> at SwimPros Looks Like
+      What <span className="text-primary">10 Days</span> at Swimpros Looks Like
     </h2>
     <p className="mb-6 text-[15px] text-primary-foreground/65">
       28 competitive swimmers. 9 countries. 1 island. Hit play.
