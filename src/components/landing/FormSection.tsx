@@ -1,4 +1,6 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
+
+const GHL_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/6FMzWKJETHi9LlgCsxFy/webhook-trigger/2e41dec7-eac2-4369-bfe6-493b1aeb708a";
 
 const COUNTRY_CODES = [
   { code: "+44", flag: "🇬🇧", name: "UK" },
