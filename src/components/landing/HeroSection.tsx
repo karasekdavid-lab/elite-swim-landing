@@ -24,9 +24,6 @@ const HeroSection = () => {
       <div className="absolute -right-16 -top-16 h-[200px] w-[200px] rounded-full bg-[radial-gradient(circle,hsl(264_100%_50%/0.15)_0%,transparent_70%)]" />
 
       <div className="relative z-10 mx-auto max-w-3xl">
-        <div className="mb-8 font-heading text-lg font-extrabold uppercase tracking-[2px] text-primary-foreground">
-          SWIM<span className="text-primary">PROS</span>
-        </div>
 
         <h1 className="mb-4 font-heading text-3xl font-extrabold leading-tight text-primary-foreground md:text-5xl">
           Your Swimmer Is Training Hard.
