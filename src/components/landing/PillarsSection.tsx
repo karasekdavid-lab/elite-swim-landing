@@ -1,10 +1,71 @@
-const pillars = [
+import { useState, useEffect } from "react";
+import flume1 from "@/assets/flume1.png";
+import flume2 from "@/assets/flume2.png";
+
+const AutoCarousel = ({ images, interval = 3500 }: { images: { src: string; alt: string }[]; interval?: number }) => {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, interval);
+    return () => clearInterval(timer);
+  }, [images.length, interval]);
+
+  return (
+    <div className="relative mb-3.5 aspect-[3/2] overflow-hidden rounded-lg">
+      <div
+        className="flex h-full transition-transform duration-700 ease-in-out"
+        style={{ transform: `translateX(-${current * 100}%)` }}
+      >
+        {images.map((img, i) => (
+          <img key={i} src={img.src} alt={img.alt} className="h-full w-full shrink-0 object-cover" />
+        ))}
+      </div>
+      {images.length > 1 && (
+        <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-1.5">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className={`h-1.5 rounded-full transition-all ${i === current ? "w-4 bg-primary" : "w-1.5 bg-foreground/30"}`}
+              aria-label={`Slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+type PillarImages = { src: string; alt: string }[];
+
+const ImagePlaceholder = ({ label, hint }: { label: string; hint: string }) => (
+  <div className="mb-3.5 flex aspect-[3/2] flex-col items-center justify-center rounded-lg border-2 border-dashed border-primary/15 bg-gradient-to-br from-primary/5 to-primary/10">
+    <span className="text-[11px] font-semibold uppercase tracking-wide text-primary/60">{label}</span>
+    <span className="mt-1 text-[10px] text-primary/40">{hint}</span>
+  </div>
+);
+
+interface Pillar {
+  icon: string;
+  title: string;
+  desc: string;
+  images?: PillarImages;
+  imgLabel?: string;
+  imgHint?: string;
+}
+
+const pillars: Pillar[] = [
   {
     icon: "🎥",
     title: "Flume Channel Video Analysis",
     desc: "Your swimmer gets filmed in a hydrodynamic flume channel with 1:1 coaching. They see exactly what's costing them time and get a personalized technical plan.",
-    imgLabel: "Photo: Flume Channel",
-    imgHint: "Swimmer in the flume with coach analyzing",
+    images: [
+      { src: flume1, alt: "Swimmer in the flume channel" },
+      { src: flume2, alt: "Swimmer at Tenerife Top Training flume" },
+    ],
   },
   {
     icon: "🧠",
@@ -37,10 +98,11 @@ const PillarsSection = () => (
     <div className="grid gap-4 md:grid-cols-3">
       {pillars.map((p, i) => (
         <div key={i} className="rounded-[14px] border border-border bg-background p-5">
-          <div className="mb-3.5 flex aspect-[3/2] flex-col items-center justify-center rounded-lg border-2 border-dashed border-primary/15 bg-gradient-to-br from-primary/5 to-primary/10">
-            <span className="text-[11px] font-semibold uppercase tracking-wide text-primary/60">{p.imgLabel}</span>
-            <span className="mt-1 text-[10px] text-primary/40">{p.imgHint}</span>
-          </div>
+          {p.images ? (
+            <AutoCarousel images={p.images} />
+          ) : (
+            <ImagePlaceholder label={p.imgLabel!} hint={p.imgHint!} />
+          )}
           <div className="mb-2.5 flex items-center gap-3.5">
             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-[22px]">
               {p.icon}
