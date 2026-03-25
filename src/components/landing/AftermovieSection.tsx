@@ -14,6 +14,9 @@ const AftermovieSection = () => (
       <video
         src="https://assets.cdn.filesafe.space/6FMzWKJETHi9LlgCsxFy/media/68e30d14ee1a8948e8fb1674.mp4"
         controls
+        autoPlay
+        muted
+        loop
         playsInline
         preload="metadata"
         className="aspect-video w-full"
