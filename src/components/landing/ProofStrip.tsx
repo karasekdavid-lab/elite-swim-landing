@@ -46,7 +46,7 @@ const ProofStrip = () => {
               key={i}
               onClick={() => setCurrent(i)}
               className={`h-3 rounded-full transition-all ${
-                i === current ? "w-8 bg-primary" : "w-3 bg-accent-foreground/30"
+                i === current ? "w-8 bg-slider-dot" : "w-3 bg-accent-foreground/30"
               }`}
             />
           ))}

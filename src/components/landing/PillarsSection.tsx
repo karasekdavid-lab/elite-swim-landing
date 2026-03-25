@@ -39,7 +39,7 @@ const AutoCarousel = ({ images, interval = 3500 }: { images: { src: string; alt:
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`h-2.5 rounded-full transition-all ${i === current ? "w-6 bg-primary" : "w-2.5 bg-foreground/40"}`}
+              className={`h-2.5 rounded-full transition-all ${i === current ? "w-6 bg-slider-dot" : "w-2.5 bg-foreground/40"}`}
               aria-label={`Slide ${i + 1}`}
             />
           ))}

@@ -60,7 +60,7 @@ const HeroSection = () => {
                 key={i}
                 onClick={() => setCurrent(i)}
                 className={`h-3 rounded-full transition-all ${
-                  i === current ? "w-8 bg-primary" : "w-3 bg-primary-foreground/50"
+                  i === current ? "w-8 bg-slider-dot" : "w-3 bg-primary-foreground/50"
                 }`}
                 aria-label={`Go to slide ${i + 1}`}
               />
