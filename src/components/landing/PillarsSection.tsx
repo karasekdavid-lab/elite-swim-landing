@@ -93,8 +93,13 @@ const pillars: Pillar[] = [
     icon: "🏊",
     title: "Olympic-Level Coaching",
     desc: "Head coach Yul doesn't watch from the deck. He gets in the water. He's coached alongside world record holder Milorad Cavic and treats every swimmer like they're headed to Olympic trials.",
-    imgLabel: "Photo: Yul In The Water",
-    imgHint: "Yul coaching swimmers in the pool",
+    images: [
+      { src: coaching1, alt: "Coach Yul watching swimmers from the deck" },
+      { src: coaching2, alt: "Yul coaching swimmers poolside" },
+      { src: coaching3, alt: "Coach reviewing heat results on whiteboard" },
+      { src: coaching4, alt: "Yul in the water coaching swimmers" },
+      { src: coaching5, alt: "Mindfulness session poolside" },
+    ],
   },
 ];
 
