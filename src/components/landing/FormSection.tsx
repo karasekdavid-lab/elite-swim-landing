@@ -1,4 +1,53 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
+
+const COUNTRY_CODES = [
+  { code: "+44", flag: "🇬🇧", name: "UK" },
+  { code: "+1", flag: "🇺🇸", name: "US" },
+  { code: "+49", flag: "🇩🇪", name: "Germany" },
+  { code: "+33", flag: "🇫🇷", name: "France" },
+  { code: "+34", flag: "🇪🇸", name: "Spain" },
+  { code: "+39", flag: "🇮🇹", name: "Italy" },
+  { code: "+31", flag: "🇳🇱", name: "Netherlands" },
+  { code: "+32", flag: "🇧🇪", name: "Belgium" },
+  { code: "+41", flag: "🇨🇭", name: "Switzerland" },
+  { code: "+43", flag: "🇦🇹", name: "Austria" },
+  { code: "+45", flag: "🇩🇰", name: "Denmark" },
+  { code: "+46", flag: "🇸🇪", name: "Sweden" },
+  { code: "+47", flag: "🇳🇴", name: "Norway" },
+  { code: "+48", flag: "🇵🇱", name: "Poland" },
+  { code: "+40", flag: "🇷🇴", name: "Romania" },
+  { code: "+351", flag: "🇵🇹", name: "Portugal" },
+  { code: "+353", flag: "🇮🇪", name: "Ireland" },
+  { code: "+358", flag: "🇫🇮", name: "Finland" },
+  { code: "+30", flag: "🇬🇷", name: "Greece" },
+  { code: "+36", flag: "🇭🇺", name: "Hungary" },
+  { code: "+420", flag: "🇨🇿", name: "Czechia" },
+  { code: "+385", flag: "🇭🇷", name: "Croatia" },
+  { code: "+381", flag: "🇷🇸", name: "Serbia" },
+  { code: "+386", flag: "🇸🇮", name: "Slovenia" },
+  { code: "+421", flag: "🇸🇰", name: "Slovakia" },
+  { code: "+359", flag: "🇧🇬", name: "Bulgaria" },
+  { code: "+90", flag: "🇹🇷", name: "Turkey" },
+  { code: "+972", flag: "🇮🇱", name: "Israel" },
+  { code: "+971", flag: "🇦🇪", name: "UAE" },
+  { code: "+61", flag: "🇦🇺", name: "Australia" },
+  { code: "+64", flag: "🇳🇿", name: "New Zealand" },
+  { code: "+27", flag: "🇿🇦", name: "South Africa" },
+  { code: "+55", flag: "🇧🇷", name: "Brazil" },
+  { code: "+52", flag: "🇲🇽", name: "Mexico" },
+  { code: "+81", flag: "🇯🇵", name: "Japan" },
+  { code: "+82", flag: "🇰🇷", name: "South Korea" },
+  { code: "+86", flag: "🇨🇳", name: "China" },
+  { code: "+91", flag: "🇮🇳", name: "India" },
+  { code: "+65", flag: "🇸🇬", name: "Singapore" },
+  { code: "+60", flag: "🇲🇾", name: "Malaysia" },
+  { code: "+63", flag: "🇵🇭", name: "Philippines" },
+  { code: "+7", flag: "🇷🇺", name: "Russia" },
+  { code: "+380", flag: "🇺🇦", name: "Ukraine" },
+  { code: "+20", flag: "🇪🇬", name: "Egypt" },
+  { code: "+234", flag: "🇳🇬", name: "Nigeria" },
+  { code: "+254", flag: "🇰🇪", name: "Kenya" },
+];
 
 const steps = [
   { num: 1, text: <><strong>You'll hear from us on WhatsApp</strong> within 10 minutes</> },
@@ -11,6 +60,7 @@ const FormSection = () => {
   const [formData, setFormData] = useState({
     parentName: "", swimmerName: "", swimmerAge: "", goal: "", struggle: "", whatsapp: "", email: "",
   });
+  const [countryCode, setCountryCode] = useState("+44");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -91,11 +141,24 @@ const FormSection = () => {
               <label className="mb-1 flex flex-wrap items-center gap-1.5 text-[13px] font-semibold text-foreground/80">
                 <span>💬</span> WhatsApp number <span className="font-normal text-muted-foreground">- this is how Yul's team will reach you</span>
               </label>
-              <input
-                type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleChange}
-                placeholder="+44 7700 900123"
-                className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
-              />
+              <div className="flex gap-2">
+                <select
+                  value={countryCode}
+                  onChange={(e) => setCountryCode(e.target.value)}
+                  className="w-[110px] shrink-0 rounded-lg border-2 border-border bg-muted px-2 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                >
+                  {COUNTRY_CODES.map((c) => (
+                    <option key={c.code + c.name} value={c.code}>
+                      {c.flag} {c.code}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleChange}
+                  placeholder="7700 900123"
+                  className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                />
+              </div>
             </div>
 
             <Field label="Email address" name="email" type="email" placeholder="your@email.com" value={formData.email} onChange={handleChange} />
