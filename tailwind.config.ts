@@ -57,6 +57,7 @@ export default {
         "hero-deep": "hsl(var(--hero-bg-deep))",
         "surface-dark": "hsl(var(--surface-dark))",
         "surface-darker": "hsl(var(--surface-darker))",
+        "slider-dot": "hsl(var(--slider-dot))",
       },
       borderRadius: {
         lg: "var(--radius)",
