@@ -23,7 +23,7 @@ const ProofStrip = () => {
 
   return (
     <div className="bg-accent px-5 py-6 md:px-10 md:py-8">
-      <div className="mx-auto max-w-sm">
+      <div className="mx-auto max-w-md">
         <div className="relative overflow-hidden rounded-xl">
           <div
             className="flex transition-transform duration-500 ease-in-out"
@@ -45,8 +45,8 @@ const ProofStrip = () => {
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`h-2 rounded-full transition-all ${
-                i === current ? "w-6 bg-primary" : "w-2 bg-accent-foreground/25"
+              className={`h-3 rounded-full transition-all ${
+                i === current ? "w-8 bg-primary" : "w-3 bg-accent-foreground/30"
               }`}
             />
           ))}

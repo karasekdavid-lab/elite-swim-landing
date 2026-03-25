@@ -54,13 +54,13 @@ const HeroSection = () => {
             ))}
           </div>
           {/* Dots */}
-          <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2">
+          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2.5">
             {heroImages.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
-                className={`h-2 rounded-full transition-all ${
-                  i === current ? "w-6 bg-primary" : "w-2 bg-primary-foreground/40"
+                className={`h-3 rounded-full transition-all ${
+                  i === current ? "w-8 bg-primary" : "w-3 bg-primary-foreground/50"
                 }`}
                 aria-label={`Go to slide ${i + 1}`}
               />
