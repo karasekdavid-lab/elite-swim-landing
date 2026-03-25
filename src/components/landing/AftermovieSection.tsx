@@ -7,7 +7,7 @@ const AftermovieSection = () => (
       What <span className="text-primary">10 Days</span> at Swimpros Looks Like
     </h2>
     <p className="mb-6 text-[15px] text-primary-foreground/65">
-      28 competitive swimmers. 9 countries. 1 island. Hit play.
+      35 competitive swimmers. 28 new PB's during camp. 9 countries. 1 island. Hit play.
     </p>
 
     <div className="relative mx-auto w-full overflow-hidden rounded-xl shadow-[0_8px_32px_hsl(264_100%_50%/0.2)] md:max-w-[720px]">
