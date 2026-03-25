@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import flume1 from "@/assets/flume1.png";
 import flume2 from "@/assets/flume2.png";
+import flume3 from "@/assets/flume3.png";
+import flume4 from "@/assets/flume4.png";
 
 const AutoCarousel = ({ images, interval = 3500 }: { images: { src: string; alt: string }[]; interval?: number }) => {
   const [current, setCurrent] = useState(0);
@@ -65,6 +67,8 @@ const pillars: Pillar[] = [
     images: [
       { src: flume1, alt: "Swimmer in the flume channel" },
       { src: flume2, alt: "Swimmer at Tenerife Top Training flume" },
+      { src: flume3, alt: "Underwater video analysis in the flume" },
+      { src: flume4, alt: "Tenerife Top Training flume facility" },
     ],
   },
   {
