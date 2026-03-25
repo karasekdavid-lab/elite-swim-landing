@@ -3,6 +3,9 @@ import flume1 from "@/assets/flume1.png";
 import flume2 from "@/assets/flume2.png";
 import flume3 from "@/assets/flume3.png";
 import flume4 from "@/assets/flume4.png";
+import mental1 from "@/assets/mental1.png";
+import mental2 from "@/assets/mental2.png";
+import mental3 from "@/assets/mental3.png";
 
 const AutoCarousel = ({ images, interval = 3500 }: { images: { src: string; alt: string }[]; interval?: number }) => {
   const [current, setCurrent] = useState(0);
@@ -75,8 +78,11 @@ const pillars: Pillar[] = [
     icon: "🧠",
     title: "Daily Mental Performance Training",
     desc: "Race anxiety, choking under pressure, inconsistent meets - these aren't character flaws. They're skills that can be trained. Same frameworks behind Olympic medalists.",
-    imgLabel: "Photo: Mental Training",
-    imgHint: "David leading a mental performance session",
+    images: [
+      { src: mental1, alt: "Mental performance session with swimmers" },
+      { src: mental2, alt: "Gym and strength training session" },
+      { src: mental3, alt: "Coach briefing swimmers poolside" },
+    ],
   },
   {
     icon: "🏊",
