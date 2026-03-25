@@ -78,8 +78,11 @@ const pillars: Pillar[] = [
     icon: "🧠",
     title: "Daily Mental Performance Training",
     desc: "Race anxiety, choking under pressure, inconsistent meets - these aren't character flaws. They're skills that can be trained. Same frameworks behind Olympic medalists.",
-    imgLabel: "Photo: Mental Training",
-    imgHint: "David leading a mental performance session",
+    images: [
+      { src: mental1, alt: "Mental performance session with swimmers" },
+      { src: mental2, alt: "Gym and strength training session" },
+      { src: mental3, alt: "Coach briefing swimmers poolside" },
+    ],
   },
   {
     icon: "🏊",
