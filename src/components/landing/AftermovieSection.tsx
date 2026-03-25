@@ -11,13 +11,13 @@ const AftermovieSection = () => (
     </p>
 
     <div className="relative mx-auto w-full overflow-hidden rounded-xl shadow-[0_8px_32px_hsl(264_100%_50%/0.2)] md:max-w-[720px]">
-      <iframe
-        src="https://www.youtube.com/embed/UplfOpXtNok"
-        title="Swimpros Camp Aftermovie"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
+      <video
+        src="https://assets.cdn.filesafe.space/6FMzWKJETHi9LlgCsxFy/media/68e30d14ee1a8948e8fb1674.mp4"
+        controls
+        playsInline
+        preload="metadata"
         className="aspect-video w-full"
-        loading="lazy"
+        title="Swimpros Camp Aftermovie"
       />
     </div>
 
