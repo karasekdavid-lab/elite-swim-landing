@@ -6,6 +6,11 @@ import flume4 from "@/assets/flume4.png";
 import mental1 from "@/assets/mental1.png";
 import mental2 from "@/assets/mental2.png";
 import mental3 from "@/assets/mental3.png";
+import coaching1 from "@/assets/coaching1.png";
+import coaching2 from "@/assets/coaching2.png";
+import coaching3 from "@/assets/coaching3.png";
+import coaching4 from "@/assets/coaching4.png";
+import coaching5 from "@/assets/coaching5.png";
 
 const AutoCarousel = ({ images, interval = 3500 }: { images: { src: string; alt: string }[]; interval?: number }) => {
   const [current, setCurrent] = useState(0);
