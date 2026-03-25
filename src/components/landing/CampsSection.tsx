@@ -43,7 +43,7 @@ const CampsSection = () => (
             <a
               key={i}
               href="#form"
-              className={`group relative overflow-hidden rounded-2xl border border-primary-foreground/10 bg-gradient-to-br ${style.gradient} bg-surface-dark p-6 text-left transition-all hover:border-primary/40 hover:shadow-[0_0_30px_hsl(264_100%_50%/0.15)]`}
+              className={`group relative overflow-hidden rounded-2xl border border-primary-foreground/10 bg-gradient-to-br ${style.gradient} bg-surface-dark p-6 text-left transition-all duration-300 hover:border-primary/40 hover:shadow-[0_0_30px_hsl(264_100%_50%/0.25)] hover:scale-[1.03] hover:-translate-y-1`}
             >
               {/* Season emoji */}
               <span className="absolute top-4 right-4 text-3xl opacity-30 group-hover:opacity-60 transition-opacity">
