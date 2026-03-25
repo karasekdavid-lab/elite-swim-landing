@@ -98,3 +98,5 @@ const CampsSection = () => (
     </div>
   </section>
 );
+
+export default CampsSection;
