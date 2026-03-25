@@ -45,6 +45,12 @@ const CampsSection = () => (
               <span className="text-sm font-semibold text-primary-foreground/30">{c.year}</span>
             </div>
 
+            {c.highlight && (
+              <p className="mb-4 rounded-lg bg-accent/10 px-3 py-2 text-[12px] font-semibold leading-snug text-accent">
+                {c.highlight}
+              </p>
+            )}
+
             <div className="flex items-center gap-2 text-xs font-semibold text-primary/80 group-hover:text-primary transition-colors">
               <span>Reserve your spot</span>
               <span className="transition-transform group-hover:translate-x-1">→</span>
