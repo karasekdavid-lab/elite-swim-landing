@@ -6,6 +6,11 @@ import flume4 from "@/assets/flume4.png";
 import mental1 from "@/assets/mental1.png";
 import mental2 from "@/assets/mental2.png";
 import mental3 from "@/assets/mental3.png";
+import coaching1 from "@/assets/coaching1.png";
+import coaching2 from "@/assets/coaching2.png";
+import coaching3 from "@/assets/coaching3.png";
+import coaching4 from "@/assets/coaching4.png";
+import coaching5 from "@/assets/coaching5.png";
 
 const AutoCarousel = ({ images, interval = 3500 }: { images: { src: string; alt: string }[]; interval?: number }) => {
   const [current, setCurrent] = useState(0);
@@ -88,8 +93,13 @@ const pillars: Pillar[] = [
     icon: "🏊",
     title: "Olympic-Level Coaching",
     desc: "Head coach Yul doesn't watch from the deck. He gets in the water. He's coached alongside world record holder Milorad Cavic and treats every swimmer like they're headed to Olympic trials.",
-    imgLabel: "Photo: Yul In The Water",
-    imgHint: "Yul coaching swimmers in the pool",
+    images: [
+      { src: coaching1, alt: "Coach Yul watching swimmers from the deck" },
+      { src: coaching2, alt: "Yul coaching swimmers poolside" },
+      { src: coaching3, alt: "Coach reviewing heat results on whiteboard" },
+      { src: coaching4, alt: "Yul in the water coaching swimmers" },
+      { src: coaching5, alt: "Mindfulness session poolside" },
+    ],
   },
 ];
 
