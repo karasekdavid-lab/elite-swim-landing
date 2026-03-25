@@ -7,6 +7,7 @@ const coaches = [
     role: "Head Coach",
     desc: "Gets in the water with every swimmer. Coached alongside Olympic medalists. Turns potential into race-day results.",
     img: yulImg,
+    objectPosition: "75% 65%",
   },
   {
     name: "David Karasek",
@@ -32,7 +33,8 @@ const CoachesSection = () => (
           <img
             src={c.img}
             alt={c.name}
-            className="h-[72px] w-[72px] shrink-0 rounded-full object-cover"
+            className="h-[88px] w-[88px] shrink-0 rounded-full object-cover"
+            style={c.objectPosition ? { objectPosition: c.objectPosition } : undefined}
           />
           <div>
             <h3 className="font-heading text-base font-bold text-secondary-foreground">{c.name}</h3>
