@@ -1,9 +1,24 @@
+import { useState, useEffect } from "react";
 import heroImg from "@/assets/hero.png";
+import heroImg2 from "@/assets/hero2.png";
+
+const heroImages = [
+  { src: heroImg, alt: "SwimPros coaching team at the pool in Tenerife" },
+  { src: heroImg2, alt: "Tenerife Top Training swimming facility at sunset" },
+];
 
 const HeroSection = () => {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-hero-bg via-hero-mid to-hero-deep px-5 py-12 text-center md:px-10 md:py-20">
-      {/* Decorative glow */}
       <div className="absolute -right-16 -top-16 h-[200px] w-[200px] rounded-full bg-[radial-gradient(circle,hsl(264_100%_50%/0.15)_0%,transparent_70%)]" />
 
       <div className="relative z-10 mx-auto max-w-3xl">
@@ -21,9 +36,34 @@ const HeroSection = () => {
           Elite coaching, flume channel analysis, and daily mental training to help competitive swimmers aged 10-18 break through plateaus.
         </p>
 
-        {/* Hero image */}
-        <div className="mx-auto mb-7 max-w-2xl overflow-hidden rounded-xl">
-          <img src={heroImg} alt="SwimPros coaching team at the pool in Tenerife" className="h-auto w-full object-cover" />
+        {/* Hero image carousel */}
+        <div className="relative mx-auto mb-7 max-w-2xl overflow-hidden rounded-xl">
+          <div
+            className="flex transition-transform duration-700 ease-in-out"
+            style={{ transform: `translateX(-${current * 100}%)` }}
+          >
+            {heroImages.map((img, i) => (
+              <img
+                key={i}
+                src={img.src}
+                alt={img.alt}
+                className="h-auto w-full shrink-0 object-cover"
+              />
+            ))}
+          </div>
+          {/* Dots */}
+          <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2">
+            {heroImages.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                className={`h-2 rounded-full transition-all ${
+                  i === current ? "w-6 bg-primary" : "w-2 bg-primary-foreground/40"
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         <a
