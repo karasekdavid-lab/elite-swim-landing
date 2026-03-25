@@ -22,7 +22,7 @@ const AftermovieSection = () => (
     </div>
 
     <p className="mt-4 text-[13px] italic text-primary-foreground/30">
-      Tenerife, 2025 — Spring Performance Camp
+      Tenerife, 2025 — Summer Performance Camp
     </p>
   </section>
 );
