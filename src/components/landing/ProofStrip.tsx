@@ -22,10 +22,7 @@ const ProofStrip = () => {
   }, []);
 
   return (
-    <div className="bg-accent px-5 py-6 text-center md:px-10 md:py-8">
-      <span className="mb-5 block text-xs font-bold uppercase tracking-[2px] text-primary">
-        What Swimpros Parents Said After Camp
-      </span>
+    <div className="bg-accent px-5 py-6 md:px-10 md:py-8">
       <div className="mx-auto max-w-md">
         <div className="relative overflow-hidden rounded-xl">
           <div

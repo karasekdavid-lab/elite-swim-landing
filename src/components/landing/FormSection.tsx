@@ -103,7 +103,7 @@ const FormSection = () => {
             Get Camp Dates, Pricing & Available Spots <span className="text-primary">on WhatsApp</span>
           </h2>
           <p className="mb-7 text-[15px] leading-relaxed text-muted-foreground">
-            We'll send you everything on WhatsApp — usually within 5 minutes. No forms, no back-and-forth. <strong className="text-foreground">Just the info you need.</strong>
+            Tell us about your swimmer and our head coach Yul will personally review their profile. Then we'll set up a quick 15-minute call where he'll share specific advice on how to unlock their next level - <strong className="text-foreground">whether that involves a camp or not.</strong>
           </p>
 
           <div className="space-y-4">
