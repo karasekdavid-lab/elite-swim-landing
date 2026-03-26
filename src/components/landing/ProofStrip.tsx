@@ -25,7 +25,7 @@ const ProofStrip = () => {
     <div className="bg-accent px-5 py-6 md:px-10 md:py-8">
       <div className="mx-auto max-w-md text-center">
         <span className="mb-4 block text-sm font-bold uppercase tracking-[2px] text-accent-foreground/60 md:text-base">
-          What Swim Parents Say
+          What Swim Parents Say About The Camps
         </span>
         <div className="relative overflow-hidden rounded-xl">
           <div
