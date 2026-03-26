@@ -3,7 +3,7 @@ import heroImg from "@/assets/hero.png";
 import heroImg2 from "@/assets/hero2.png";
 import heroImg3 from "@/assets/hero3.png";
 
-const GHL_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/6FMzWKJETHi9LlgCsxFy/webhook-trigger/2e41dec7-eac2-4369-bfe6-493b1aeb708a";
+const GHL_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/6FMzWKJETHi9LlgCsxFy/webhook-trigger/c05249f6-8d86-45a5-8faa-fdcf77d0cc32";
 
 const COUNTRY_CODES = [
   { code: "+44", flag: "🇬🇧", label: "GB" },
