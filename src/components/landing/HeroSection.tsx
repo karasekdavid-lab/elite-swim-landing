@@ -167,7 +167,7 @@ const HeroSection = () => {
               disabled={submitting}
               className="mt-1 w-full rounded-lg bg-[#25D366] py-4 font-heading text-base font-bold text-white shadow-md transition-transform hover:scale-[1.02] disabled:opacity-60"
             >
-              {submitting ? "SENDING..." : <>SEND ME THE DETAILS <span className="text-[#128C7E]">→</span></>}
+              {submitting ? "SENDING..." : "SEND ME THE DETAILS →"}
             </button>
             <p className="text-center text-[11px] text-muted-foreground">
               No spam. We'll text you the camp info and you decide from there.
