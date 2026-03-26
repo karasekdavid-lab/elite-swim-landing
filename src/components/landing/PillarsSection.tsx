@@ -89,6 +89,8 @@ const pillars: Pillar[] = [
       { src: mental1, alt: "Mental performance session with swimmers" },
       { src: mental2, alt: "Gym and strength training session" },
       { src: mental3, alt: "Coach briefing swimmers poolside" },
+      { src: mental4, alt: "David and Yul discussing training plan poolside" },
+      { src: mental5, alt: "Swimpros group selfie with swimmers on the stands" },
     ],
   },
   {
