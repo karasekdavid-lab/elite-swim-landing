@@ -81,7 +81,7 @@ const CampsSection = () => (
               )}
 
               <div className="flex items-center gap-2 text-xs font-bold text-accent group-hover:text-accent transition-colors">
-                <span>Reserve your spot</span>
+                <span>Find out more</span>
                 <span className="transition-transform group-hover:translate-x-1">→</span>
               </div>
 
