@@ -32,7 +32,7 @@ const HeroSection = () => {
         </h1>
 
         <p className="mx-auto mb-7 max-w-xl text-base leading-relaxed text-primary-foreground/70 md:text-lg">
-          Elite coaching, flume channel analysis, and daily confidence training to help competitive swimmers break through plateaus.
+          We'll send you everything on WhatsApp — usually within 5 minutes. No forms, no back-and-forth. Just the info you need.
         </p>
 
         {/* Hero image carousel */}
