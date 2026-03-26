@@ -52,7 +52,7 @@ const COUNTRY_CODES = [
 ];
 
 const steps = [
-  { num: 1, text: <><strong>You'll hear from us on WhatsApp</strong> within 10 minutes</> },
+  { num: 1, text: <><strong>You'll hear from us on WhatsApp</strong> within 5 minutes</> },
   { num: 2, text: <><strong>Quick follow-up questions</strong> about your swimmer's training</> },
   { num: 3, text: <><strong>Yul reviews your swimmer's profile</strong> before the call</> },
   { num: 4, text: <><strong>15-min call with Yul</strong> - personalized game plan for your swimmer</> },
@@ -127,7 +127,7 @@ const FormSection = () => {
               <div className="mb-4 text-5xl">🎉</div>
               <h3 className="mb-2 font-heading text-xl font-bold text-foreground">You're In!</h3>
               <p className="text-sm text-muted-foreground">
-                Yul's team will reach out on WhatsApp within 10 minutes. Keep an eye on your phone!
+                Yul's team will reach out on WhatsApp within 5 minutes. Keep an eye on your phone!
               </p>
             </div>
           ) : (
