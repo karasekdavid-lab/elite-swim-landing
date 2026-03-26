@@ -26,9 +26,9 @@ const HeroSection = () => {
       <div className="relative z-10 mx-auto max-w-3xl">
 
         <h1 className="mb-4 font-heading text-3xl font-extrabold leading-tight text-primary-foreground md:text-5xl">
-          Your Swimmer Is Training Hard.
+          Get Camp Dates, Pricing & Available Spots
           <br />
-          <span className="text-accent">Are They Training Smart?</span>
+          <span className="text-accent">on WhatsApp</span>
         </h1>
 
         <p className="mx-auto mb-7 max-w-xl text-base leading-relaxed text-primary-foreground/70 md:text-lg">
