@@ -1,4 +1,4 @@
-import yulImg from "@/assets/yul_headshot.png";
+import yulImg from "@/assets/yul.png";
 import davidImg from "@/assets/david_headshot.png";
 
 const coaches = [
