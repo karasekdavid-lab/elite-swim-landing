@@ -71,7 +71,7 @@ const HeroSection = () => {
         >
           GET YOUR FREE PERFORMANCE ASSESSMENT →
         </a>
-        <p className="mt-2.5 max-w-lg mx-auto text-xs text-primary-foreground/30">
+        <p className="mt-2.5 max-w-lg mx-auto text-sm text-primary-foreground/30">
           Free 15-min call with our head coach to see if your swimmer would benefit from our camps - no strings attached. You'll also get the exact pricing on the call as it depends on accommodation choice. Yul is happy to walk you through the options.
         </p>
       </div>
