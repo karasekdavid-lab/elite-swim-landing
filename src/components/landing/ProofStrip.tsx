@@ -23,6 +23,9 @@ const ProofStrip = () => {
 
   return (
     <div className="bg-accent px-5 py-6 md:px-10 md:py-8">
+      <h2 className="mb-5 text-center font-heading text-xl font-extrabold uppercase tracking-wide text-accent-foreground md:text-2xl">
+        What Our Clients Said After Camp
+      </h2>
       <div className="mx-auto max-w-md">
         <div className="relative overflow-hidden rounded-xl">
           <div
