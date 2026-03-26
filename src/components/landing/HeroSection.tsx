@@ -113,6 +113,10 @@ const HeroSection = () => {
           </div>
         </div>
 
+        <p className="mb-7 text-sm font-semibold text-primary-foreground/80 md:text-base">
+          ✓ 200+ families from 15+ countries
+        </p>
+
         {/* Quick WhatsApp form */}
         <div className="mx-auto max-w-md rounded-2xl bg-background p-6 shadow-[0_4px_30px_hsl(0_0%_0%/0.15)]">
           <h3 className="mb-1 font-heading text-lg font-bold text-foreground">Get the Details Instantly</h3>
