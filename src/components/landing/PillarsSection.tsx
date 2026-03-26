@@ -6,6 +6,8 @@ import flume4 from "@/assets/flume4.png";
 import mental1 from "@/assets/mental1.png";
 import mental2 from "@/assets/mental2.png";
 import mental3 from "@/assets/mental3.png";
+import mental4 from "@/assets/mental4.png";
+import mental5 from "@/assets/mental5.png";
 import coaching1 from "@/assets/coaching1.png";
 import coaching2 from "@/assets/coaching2.png";
 import coaching3 from "@/assets/coaching3.png";
@@ -87,6 +89,8 @@ const pillars: Pillar[] = [
       { src: mental1, alt: "Mental performance session with swimmers" },
       { src: mental2, alt: "Gym and strength training session" },
       { src: mental3, alt: "Coach briefing swimmers poolside" },
+      { src: mental4, alt: "David and Yul discussing training plan poolside" },
+      { src: mental5, alt: "Swimpros group selfie with swimmers on the stands" },
     ],
   },
   {
