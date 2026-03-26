@@ -105,6 +105,8 @@ const pillars: Pillar[] = [
       { src: coaching3, alt: "Coach reviewing heat results on whiteboard" },
       { src: coaching4, alt: "Yul in the water coaching swimmers" },
       { src: coaching5, alt: "Mindfulness session poolside" },
+      { src: coaching6, alt: "Swimmers relaxing in the pool after training" },
+      { src: coaching7, alt: "Rebecca Karasek mobility and recovery session" },
     ],
   },
 ];
