@@ -100,7 +100,7 @@ const FormSection = () => {
             Free Assessment
           </span>
           <h2 className="mb-3.5 font-heading text-2xl font-extrabold leading-tight text-foreground md:text-[32px]">
-            Get Your Swimmer's Free <span className="text-primary">Performance Assessment</span>
+            Get Camp Dates, Pricing & Available Spots <span className="text-primary">on WhatsApp</span>
           </h2>
           <p className="mb-7 text-[15px] leading-relaxed text-muted-foreground">
             Tell us about your swimmer and our head coach Yul will personally review their profile. Then we'll set up a quick 15-minute call where he'll share specific advice on how to unlock their next level - <strong className="text-foreground">whether that involves a camp or not.</strong>
