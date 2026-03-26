@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import heroImg from "@/assets/hero.png";
-import heroImg2 from "@/assets/hero2.png";
 import heroImg3 from "@/assets/hero3.png";
+import heroImg4 from "@/assets/hero4.png";
+import heroImg5 from "@/assets/hero5.png";
 
 const heroImages = [
   { src: heroImg, alt: "Swimpros coaching team at the pool in Tenerife" },
-  { src: heroImg2, alt: "Tenerife Top Training swimming facility at sunset" },
+  { src: heroImg4, alt: "Tenerife Top Training swimming pools aerial view" },
+  { src: heroImg5, alt: "Coach Yul watching swimmers train at Tenerife Top Training" },
   { src: heroImg3, alt: "Swimpros group photo with all swimmers" },
 ];
 
