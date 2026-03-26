@@ -52,7 +52,7 @@ const COUNTRY_CODES = [
 ];
 
 const steps = [
-  { num: 1, text: <><strong>You'll hear from us on WhatsApp</strong> within 10 minutes</> },
+  { num: 1, text: <><strong>You'll hear from us on WhatsApp</strong> within 5 minutes</> },
   { num: 2, text: <><strong>Quick follow-up questions</strong> about your swimmer's training</> },
   { num: 3, text: <><strong>Yul reviews your swimmer's profile</strong> before the call</> },
   { num: 4, text: <><strong>15-min call with Yul</strong> - personalized game plan for your swimmer</> },
