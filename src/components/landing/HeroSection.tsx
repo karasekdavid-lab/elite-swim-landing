@@ -114,7 +114,7 @@ const HeroSection = () => {
         </div>
 
         <p className="mb-7 text-sm font-semibold text-primary-foreground/80 md:text-base">
-          ✓ 200+ families from 15+ countries
+          <span className="text-[#25D366]">✓</span> 200+ families from 15+ countries
         </p>
 
         {/* Quick WhatsApp form */}
