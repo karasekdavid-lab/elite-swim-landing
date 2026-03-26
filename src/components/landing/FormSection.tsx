@@ -127,7 +127,7 @@ const FormSection = () => {
               <div className="mb-4 text-5xl">🎉</div>
               <h3 className="mb-2 font-heading text-xl font-bold text-foreground">You're In!</h3>
               <p className="text-sm text-muted-foreground">
-                Yul's team will reach out on WhatsApp within 10 minutes. Keep an eye on your phone!
+                Yul's team will reach out on WhatsApp within 5 minutes. Keep an eye on your phone!
               </p>
             </div>
           ) : (
