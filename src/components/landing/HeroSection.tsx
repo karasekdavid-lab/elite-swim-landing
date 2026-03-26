@@ -161,7 +161,7 @@ const HeroSection = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="mt-1 w-full rounded-lg bg-accent py-4 font-heading text-base font-bold text-accent-foreground shadow-md transition-transform hover:scale-[1.02] disabled:opacity-60"
+              className="mt-1 w-full rounded-lg bg-[#25D366] py-4 font-heading text-base font-bold text-white shadow-md transition-transform hover:scale-[1.02] disabled:opacity-60"
             >
               {submitting ? "SENDING..." : "SEND ME THE DETAILS →"}
             </button>
