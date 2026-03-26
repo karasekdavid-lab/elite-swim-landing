@@ -121,7 +121,7 @@ const HeroSection = () => {
         <div className="mx-auto max-w-md rounded-2xl bg-background p-6 shadow-[0_4px_30px_hsl(0_0%_0%/0.15)]">
           <h3 className="mb-1 font-heading text-lg font-bold text-foreground">Get the Details Instantly</h3>
           <p className="mb-5 text-sm text-muted-foreground">
-            We'll message you on <span className="font-semibold text-primary">WhatsApp</span> with dates, pricing, and what's included.
+            We'll message you on <span className="font-semibold text-primary">WhatsApp</span> to ask a few qualifying questions about your swimmer and share dates, pricing & logistics with you.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-3">
