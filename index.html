@@ -21,5 +21,17 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      (function(){
+        function sendHeight(){
+          var h = document.documentElement.scrollHeight;
+          window.parent.postMessage({type:'resize',height:h},'*');
+        }
+        window.addEventListener('load',sendHeight);
+        window.addEventListener('resize',sendHeight);
+        new MutationObserver(sendHeight).observe(document.body,{childList:true,subtree:true,attributes:true});
+        setInterval(sendHeight,1000);
+      })();
+    </script>
   </body>
 </html>
