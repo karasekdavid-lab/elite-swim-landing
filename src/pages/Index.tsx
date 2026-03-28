@@ -1,3 +1,4 @@
+import skoolIcon from "@/assets/skool-icon.png";
 import HeroSection from "@/components/landing/HeroSection";
 import ProofStrip from "@/components/landing/ProofStrip";
 import AftermovieSection from "@/components/landing/AftermovieSection";
