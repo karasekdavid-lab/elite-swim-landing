@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Progress } from "@/components/ui/progress";
 
 const GHL_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/6FMzWKJETHi9LlgCsxFy/webhook-trigger/2e41dec7-eac2-4369-bfe6-493b1aeb708a";
 
@@ -58,17 +59,23 @@ const steps = [
   { num: 4, text: <><strong>15-min call with Yul</strong> - personalized game plan for your swimmer</> },
 ];
 
+const STEP_LABELS = ["About You", "Your Swimmer", "WhatsApp"];
+
 const FormSection = () => {
   const [formData, setFormData] = useState({
-    parentName: "", swimmerName: "", swimmerAge: "", goal: "", struggle: "", whatsapp: "", email: "",
+    parentName: "", email: "", swimmerAge: "", goal: "", struggle: "", whatsapp: "",
   });
   const [countryCode, setCountryCode] = useState("+44");
+  const [step, setStep] = useState(1);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const nextStep = () => setStep((s) => Math.min(s + 1, 3));
+  const prevStep = () => setStep((s) => Math.max(s - 1, 1));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -90,6 +97,8 @@ const FormSection = () => {
       setSubmitting(false);
     }
   };
+
+  const progressValue = (step / 3) * 100;
 
   return (
     <section id="form" className="bg-gradient-to-b from-primary/5 to-background px-5 py-14 md:px-10 md:py-20">
@@ -132,79 +141,137 @@ const FormSection = () => {
             </div>
           ) : (
             <>
-              <div className="mb-6 text-center">
-                <h3 className="font-heading text-lg font-bold text-foreground">Tell Us About Your Swimmer</h3>
-                <p className="mt-1 text-xs text-muted-foreground">Takes 60 seconds. Yul reviews every one personally.</p>
+              {/* Step indicator */}
+              <div className="mb-6">
+                <div className="mb-2 flex justify-between text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                  {STEP_LABELS.map((label, i) => (
+                    <span key={label} className={i + 1 <= step ? "text-primary" : ""}>{label}</span>
+                  ))}
+                </div>
+                <Progress value={progressValue} className="h-1.5" />
+                <p className="mt-3 text-center text-xs text-muted-foreground">
+                  Step {step} of 3 {step === 1 && "— Takes 60 seconds. Yul reviews every one personally."}
+                </p>
               </div>
 
-              <form className="space-y-4" onSubmit={handleSubmit}>
-                <Field label="Your full name" name="parentName" type="text" placeholder="e.g. Sarah Johnson" value={formData.parentName} onChange={handleChange} />
-                <Field label="Your swimmer's age" name="swimmerAge" type="number" placeholder="e.g. 14" value={formData.swimmerAge} onChange={handleChange} />
-
-                <div>
-                  <label className="mb-1 block text-[13px] font-semibold text-foreground/80">What's their #1 goal right now?</label>
-                  <select
-                    name="goal"
-                    value={formData.goal}
-                    onChange={handleChange}
-                    className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
-                  >
-                    <option value="" disabled>Choose one...</option>
-                    <option>Drop time / Get faster</option>
-                    <option>Improve technique</option>
-                    <option>Build race-day confidence</option>
-                    <option>Qualify for a big meet</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="mb-1 block text-[13px] font-semibold text-foreground/80">
-                    What's their biggest struggle? <span className="font-normal text-muted-foreground">(1-2 sentences)</span>
-                  </label>
-                  <textarea
-                    name="struggle"
-                    value={formData.struggle}
-                    onChange={handleChange}
-                    placeholder="e.g. She trains great but freezes up at meets..."
-                    className="min-h-[80px] w-full resize-y rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-1 flex flex-wrap items-center gap-1.5 text-[13px] font-semibold text-foreground/80">
-                    <span>💬</span> WhatsApp number <span className="font-normal text-muted-foreground">- this is how Yul's team will reach you</span>
-                  </label>
-                  <div className="flex gap-2">
-                    <select
-                      value={countryCode}
-                      onChange={(e) => setCountryCode(e.target.value)}
-                      className="w-[110px] shrink-0 rounded-lg border-2 border-border bg-muted px-2 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+              <form onSubmit={handleSubmit}>
+                {/* Step 1: Name & Email */}
+                {step === 1 && (
+                  <div className="space-y-4">
+                    <h3 className="font-heading text-lg font-bold text-foreground text-center">Let's Get Started</h3>
+                    <Field label="Your full name" name="parentName" type="text" placeholder="e.g. Sarah Johnson" value={formData.parentName} onChange={handleChange} />
+                    <Field label="Email address" name="email" type="email" placeholder="your@email.com" value={formData.email} onChange={handleChange} />
+                    <button
+                      type="button"
+                      onClick={nextStep}
+                      disabled={!formData.parentName.trim() || !formData.email.trim()}
+                      className="mt-1 w-full rounded-lg bg-primary py-4 font-heading text-base font-bold text-primary-foreground shadow-[0_4px_16px_hsl(264_100%_50%/0.2)] transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
                     >
-                      {COUNTRY_CODES.map((c) => (
-                        <option key={c.code + c.name} value={c.code}>
-                          {c.flag} {c.code}
-                        </option>
-                      ))}
-                    </select>
-                    <input
-                      type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleChange}
-                      placeholder="7700 900123"
-                      className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
-                    />
+                      NEXT — TELL US ABOUT YOUR SWIMMER →
+                    </button>
                   </div>
-                </div>
+                )}
 
-                <Field label="Email address" name="email" type="email" placeholder="your@email.com" value={formData.email} onChange={handleChange} />
+                {/* Step 2: Swimmer details */}
+                {step === 2 && (
+                  <div className="space-y-4">
+                    <h3 className="font-heading text-lg font-bold text-foreground text-center">About Your Swimmer</h3>
+                    <Field label="Your swimmer's age" name="swimmerAge" type="number" placeholder="e.g. 14" value={formData.swimmerAge} onChange={handleChange} />
+                    <div>
+                      <label className="mb-1 block text-[13px] font-semibold text-foreground/80">What's their #1 goal right now?</label>
+                      <select
+                        name="goal"
+                        value={formData.goal}
+                        onChange={handleChange}
+                        className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                      >
+                        <option value="" disabled>Choose one...</option>
+                        <option>Drop time / Get faster</option>
+                        <option>Improve technique</option>
+                        <option>Build race-day confidence</option>
+                        <option>Qualify for a big meet</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="mb-1 block text-[13px] font-semibold text-foreground/80">
+                        What's their biggest struggle? <span className="font-normal text-muted-foreground">(1-2 sentences)</span>
+                      </label>
+                      <textarea
+                        name="struggle"
+                        value={formData.struggle}
+                        onChange={handleChange}
+                        placeholder="e.g. She trains great but freezes up at meets..."
+                        className="min-h-[80px] w-full resize-y rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                      />
+                    </div>
+                    <div className="flex gap-3">
+                      <button
+                        type="button"
+                        onClick={prevStep}
+                        className="rounded-lg border-2 border-border px-5 py-4 font-heading text-sm font-bold text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
+                      >
+                        ← BACK
+                      </button>
+                      <button
+                        type="button"
+                        onClick={nextStep}
+                        disabled={!formData.swimmerAge.trim()}
+                        className="flex-1 rounded-lg bg-primary py-4 font-heading text-base font-bold text-primary-foreground shadow-[0_4px_16px_hsl(264_100%_50%/0.2)] transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
+                      >
+                        NEXT — LAST STEP →
+                      </button>
+                    </div>
+                  </div>
+                )}
 
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="mt-1 w-full rounded-lg bg-primary py-4 font-heading text-base font-bold text-primary-foreground shadow-[0_4px_16px_hsl(264_100%_50%/0.2)] transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
-                >
-                  {submitting ? "SENDING..." : "SEND MY SWIMMER'S PROFILE TO YUL →"}
-                </button>
-                <p className="text-center text-[11px] text-muted-foreground">No spam. No pressure. Just a coaching conversation about your swimmer.</p>
+                {/* Step 3: WhatsApp number */}
+                {step === 3 && (
+                  <div className="space-y-4">
+                    <h3 className="font-heading text-lg font-bold text-foreground text-center">Almost Done!</h3>
+                    <p className="text-center text-sm text-muted-foreground">This is how Yul's team will reach you within 5 minutes.</p>
+                    <div>
+                      <label className="mb-1 flex flex-wrap items-center gap-1.5 text-[13px] font-semibold text-foreground/80">
+                        <span>💬</span> WhatsApp number
+                      </label>
+                      <div className="flex gap-2">
+                        <select
+                          value={countryCode}
+                          onChange={(e) => setCountryCode(e.target.value)}
+                          className="w-[110px] shrink-0 rounded-lg border-2 border-border bg-muted px-2 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                        >
+                          {COUNTRY_CODES.map((c) => (
+                            <option key={c.code + c.name} value={c.code}>
+                              {c.flag} {c.code}
+                            </option>
+                          ))}
+                        </select>
+                        <input
+                          type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleChange}
+                          placeholder="7700 900123"
+                          className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex gap-3">
+                      <button
+                        type="button"
+                        onClick={prevStep}
+                        className="rounded-lg border-2 border-border px-5 py-4 font-heading text-sm font-bold text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
+                      >
+                        ← BACK
+                      </button>
+                      <button
+                        type="submit"
+                        disabled={submitting || !formData.whatsapp.trim()}
+                        className="flex-1 rounded-lg bg-primary py-4 font-heading text-base font-bold text-primary-foreground shadow-[0_4px_16px_hsl(264_100%_50%/0.2)] transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
+                      >
+                        {submitting ? "SENDING..." : "SEND MY SWIMMER'S PROFILE TO YUL →"}
+                      </button>
+                    </div>
+                    <p className="text-center text-[11px] text-muted-foreground">No spam. No pressure. Just a coaching conversation about your swimmer.</p>
+                  </div>
+                )}
               </form>
             </>
           )}
