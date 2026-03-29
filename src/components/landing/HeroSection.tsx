@@ -3,6 +3,7 @@ import heroImg from "@/assets/hero.png";
 import heroImg3 from "@/assets/hero3.png";
 import heroImg4 from "@/assets/hero4.png";
 import heroImg5 from "@/assets/hero5.png";
+import { scrollToForm } from "@/lib/scrollToForm";
 
 const heroImages = [
   { src: heroImg, alt: "Swimpros coaching team at the pool in Tenerife" },
@@ -69,6 +70,7 @@ const HeroSection = () => {
 
         <a
           href="#form"
+          onClick={scrollToForm}
           className="relative z-20 inline-block w-full rounded-lg bg-primary px-6 py-4 font-heading text-[15px] font-bold text-primary-foreground shadow-[0_4px_20px_hsl(264_100%_50%/0.27)] transition-transform hover:scale-[1.02] md:w-auto md:px-10 md:text-[17px]"
         >
           GET YOUR FREE PERFORMANCE ASSESSMENT →
