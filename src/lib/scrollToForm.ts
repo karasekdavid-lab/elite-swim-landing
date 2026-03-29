@@ -6,5 +6,14 @@ export const scrollToForm = (event?: MouseEvent<HTMLElement>) => {
   const formSection = document.getElementById("form");
   if (!formSection) return;
 
-  formSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  const targetTop = formSection.getBoundingClientRect().top + window.scrollY;
+
+  window.scrollTo({
+    top: Math.max(0, targetTop - 12),
+    behavior: "smooth",
+  });
+
+  requestAnimationFrame(() => {
+    formSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 };
