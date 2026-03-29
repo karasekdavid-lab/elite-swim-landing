@@ -69,7 +69,7 @@ const HeroSection = () => {
 
         <a
           href="#form"
-          className="inline-block w-full rounded-lg bg-primary px-6 py-4 font-heading text-[15px] font-bold text-primary-foreground shadow-[0_4px_20px_hsl(264_100%_50%/0.27)] transition-transform hover:scale-[1.02] md:w-auto md:px-10 md:text-[17px]"
+          className="relative z-20 inline-block w-full rounded-lg bg-primary px-6 py-4 font-heading text-[15px] font-bold text-primary-foreground shadow-[0_4px_20px_hsl(264_100%_50%/0.27)] transition-transform hover:scale-[1.02] md:w-auto md:px-10 md:text-[17px]"
         >
           GET YOUR FREE PERFORMANCE ASSESSMENT →
         </a>
