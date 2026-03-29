@@ -1,3 +1,5 @@
+import { scrollToForm } from "@/lib/scrollToForm";
+
 const camps = [
   { name: "Summer Camp 1", dates: "Aug 4 – 14", year: "2026", tag: "FILLING FAST", tagColor: "destructive" as const, highlight: "🐬 Includes Junior Camp for 8–12 year old swimmers", emoji: "☀️", season: "summer", vibe: "Golden sunshine & long pool days" },
   { name: "Summer Camp 2", dates: "Aug 17 – 27", year: "2026", tag: "FILLING FAST", tagColor: "destructive" as const, highlight: "⭐ Guest coaches: WR holders Peter Mankoč & Milorad Čavić — all 10 days", emoji: "🌊", season: "summer", vibe: "Best SCM Season Start EVER" },
@@ -43,6 +45,7 @@ const CampsSection = () => (
             <a
               key={i}
               href="#form"
+              onClick={scrollToForm}
               className={`group relative overflow-hidden rounded-2xl border border-primary-foreground/10 bg-gradient-to-br ${style.gradient} bg-surface-dark p-6 text-left transition-all duration-300 hover:border-primary/40 hover:shadow-[0_0_30px_hsl(264_100%_50%/0.25)] hover:scale-[1.03] hover:-translate-y-1`}
             >
               {/* Season emoji */}
