@@ -8,13 +8,13 @@ const FinalCTA = () => (
     <p className="mx-auto mb-6 max-w-lg text-[15px] leading-relaxed text-primary-foreground/70">
       Tell us about your swimmer. Yul will personally review their profile and give you a game plan - free.
     </p>
-    <a
-      href="#form"
+    <button
+      type="button"
       onClick={scrollToForm}
       className="inline-block w-full rounded-lg bg-accent px-6 py-4 font-heading text-[15px] font-extrabold text-accent-foreground transition-transform hover:scale-[1.02] md:w-auto md:px-12"
     >
       GET THE FREE PERFORMANCE ASSESSMENT ↑
-    </a>
+    </button>
   </section>
 );
 
