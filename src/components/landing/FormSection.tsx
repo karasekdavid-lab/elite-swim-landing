@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Progress } from "@/components/ui/progress";
 
-const GHL_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/6FMzWKJETHi9LlgCsxFy/webhook-trigger/ef7e4eb5-824c-4664-9e71-80aa7e62db2c";
+const GHL_WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/6FMzWKJETHi9LlgCsxFy/webhook-trigger/96cffe3f-f410-4c8a-8e4a-9c35f1de9b4e";
 
 const COUNTRY_CODES = [
   { code: "+44", flag: "🇬🇧", name: "UK" },
