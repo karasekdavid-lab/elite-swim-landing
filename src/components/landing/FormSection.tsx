@@ -84,7 +84,7 @@ const FormSection = () => {
     try {
       const res = await fetch(GHL_WEBHOOK_URL, {
         method: "POST",
-        headers: { "Content-Type": "text/plain" },
+        headers: { "Content-Type": "application/json" },
         keepalive: true,
         body: payload,
       });
