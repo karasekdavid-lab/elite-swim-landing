@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import googleReviews from "@/assets/google-reviews.png";
 import wa1 from "@/assets/whatsapp1.png";
 import wa2 from "@/assets/whatsapp2.png";
 import wa3 from "@/assets/whatsapp3.png";
 import wa4 from "@/assets/whatsapp4.png";
 
 const testimonialImages = [
+  { src: googleReviews, alt: "SwimPros Google Reviews - 5.0 rating with 51 five-star reviews" },
   { src: wa1, alt: "WhatsApp testimonial from a parent thanking the coaching team" },
   { src: wa2, alt: "WhatsApp testimonial thanking the camp for great training" },
   { src: wa3, alt: "WhatsApp testimonial praising the top camp experience" },
