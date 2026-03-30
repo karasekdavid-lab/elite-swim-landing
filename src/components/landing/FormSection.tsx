@@ -75,17 +75,20 @@ const FormSection = () => {
   };
 
   const sendPartial = async () => {
+    const payload = JSON.stringify({
+      ...formData,
+      whatsapp: formData.whatsapp ? `${countryCode}${formData.whatsapp}` : "",
+      partial: true,
+    });
+    console.log("Sending partial to GHL:", payload);
     try {
-      await fetch(GHL_WEBHOOK_URL, {
+      const res = await fetch(GHL_WEBHOOK_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/plain" },
         keepalive: true,
-        body: JSON.stringify({
-          ...formData,
-          whatsapp: formData.whatsapp ? `${countryCode}${formData.whatsapp}` : "",
-          partial: true,
-        }),
+        body: payload,
       });
+      console.log("Partial webhook response:", res.status);
     } catch (err) {
       console.error("Partial webhook error:", err);
     }
@@ -101,14 +104,17 @@ const FormSection = () => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      await fetch(GHL_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          whatsapp: `${countryCode}${formData.whatsapp}`,
-        }),
+      const payload = JSON.stringify({
+        ...formData,
+        whatsapp: `${countryCode}${formData.whatsapp}`,
       });
+      console.log("Sending final to GHL:", payload);
+      const res = await fetch(GHL_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain" },
+        body: payload,
+      });
+      console.log("Final webhook response:", res.status);
       (window.top || window).location.href = "https://www.swimpros.com/successful";
     } catch (err) {
       console.error("Webhook error:", err);
