@@ -50,6 +50,20 @@ const TestimonialsSection = () => (
         )
       )}
     </div>
+
+    <p className="mt-8 text-center text-base font-semibold leading-relaxed text-foreground md:text-lg">
+      In 2026 you can't trust everything you see on the internet.{" "}
+      <br className="hidden md:inline" />
+      But you can trust{" "}
+      <a
+        href="https://www.google.com/maps/place/SwimPros/@0,0,0z/data=!4m8!3m7!1s0x0:0x0!8m2!3d0!4d0!9m1!1b1"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-primary underline underline-offset-2 hover:text-primary/80"
+      >
+        50 five-star ratings on Google ⭐
+      </a>
+    </p>
   </section>
 );
 
