@@ -27,17 +27,20 @@ const ProofStrip = () => {
         <span className="mb-4 block text-sm font-bold uppercase tracking-[2px] text-accent-foreground/60 md:text-base">
           What Swim Parents Say About The Camps
         </span>
-        <h2 className="mb-5 font-heading text-[26px] font-extrabold leading-tight text-accent-foreground md:text-4xl">
-          In 2026 you can't trust everything you see on the internet. But you can trust{" "}
+        <h2 className="mb-2 font-heading text-[26px] font-extrabold leading-tight text-accent-foreground md:text-4xl">
+          You Can't Trust Everything You See on The Internet.
+        </h2>
+        <p className="mb-5 text-base text-accent-foreground/70 md:text-lg">
+          But you can trust{" "}
           <a
             href="https://g.page/r/CX-ypm1QP-n2EAI/review"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary underline underline-offset-2 hover:text-primary/80"
+            className="font-semibold text-primary underline underline-offset-2 hover:text-primary/80"
           >
-            50 five-star ratings on Google ⭐
+            51x five-star ratings including reviews & pictures on Google ⭐
           </a>
-        </h2>
+        </p>
         <div className="relative overflow-hidden rounded-xl">
           <div
             className="flex transition-transform duration-500 ease-in-out"
