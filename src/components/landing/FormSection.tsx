@@ -111,7 +111,7 @@ const FormSection = () => {
       console.log("Sending final to GHL:", payload);
       const res = await fetch(GHL_WEBHOOK_URL, {
         method: "POST",
-        headers: { "Content-Type": "text/plain" },
+        headers: { "Content-Type": "application/json" },
         body: payload,
       });
       console.log("Final webhook response:", res.status);
