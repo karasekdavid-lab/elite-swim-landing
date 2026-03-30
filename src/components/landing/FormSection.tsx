@@ -74,20 +74,25 @@ const FormSection = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const sendPartial = () => {
-    fetch(GHL_WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        ...formData,
-        whatsapp: formData.whatsapp ? `${countryCode}${formData.whatsapp}` : "",
-        partial: true,
-      }),
-    }).catch((err) => console.error("Partial webhook error:", err));
+  const sendPartial = async () => {
+    try {
+      await fetch(GHL_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        keepalive: true,
+        body: JSON.stringify({
+          ...formData,
+          whatsapp: formData.whatsapp ? `${countryCode}${formData.whatsapp}` : "",
+          partial: true,
+        }),
+      });
+    } catch (err) {
+      console.error("Partial webhook error:", err);
+    }
   };
 
-  const nextStep = () => {
-    sendPartial();
+  const nextStep = async () => {
+    await sendPartial();
     setStep((s) => Math.min(s + 1, 3));
   };
   const prevStep = () => setStep((s) => Math.max(s - 1, 1));
