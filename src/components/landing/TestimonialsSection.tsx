@@ -56,7 +56,7 @@ const TestimonialsSection = () => (
       <br className="hidden md:inline" />
       But you can trust{" "}
       <a
-        href="https://www.google.com/maps/place/SwimPros/@0,0,0z/data=!4m8!3m7!1s0x0:0x0!8m2!3d0!4d0!9m1!1b1"
+        href="https://g.page/r/CX-ypm1QP-n2EAI/review"
         target="_blank"
         rel="noopener noreferrer"
         className="text-primary underline underline-offset-2 hover:text-primary/80"
