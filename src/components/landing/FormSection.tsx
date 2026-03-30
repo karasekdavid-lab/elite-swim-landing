@@ -75,17 +75,20 @@ const FormSection = () => {
   };
 
   const sendPartial = async () => {
+    const payload = JSON.stringify({
+      ...formData,
+      whatsapp: formData.whatsapp ? `${countryCode}${formData.whatsapp}` : "",
+      partial: true,
+    });
+    console.log("Sending partial to GHL:", payload);
     try {
-      await fetch(GHL_WEBHOOK_URL, {
+      const res = await fetch(GHL_WEBHOOK_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/plain" },
         keepalive: true,
-        body: JSON.stringify({
-          ...formData,
-          whatsapp: formData.whatsapp ? `${countryCode}${formData.whatsapp}` : "",
-          partial: true,
-        }),
+        body: payload,
       });
+      console.log("Partial webhook response:", res.status);
     } catch (err) {
       console.error("Partial webhook error:", err);
     }
