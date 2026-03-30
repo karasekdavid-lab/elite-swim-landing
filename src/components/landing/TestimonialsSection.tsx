@@ -50,20 +50,6 @@ const TestimonialsSection = () => (
         )
       )}
     </div>
-
-    <p className="mt-8 text-center text-base font-semibold leading-relaxed text-foreground md:text-lg">
-      In 2026 you can't trust everything you see on the internet.{" "}
-      <br className="hidden md:inline" />
-      But you can trust{" "}
-      <a
-        href="https://g.page/r/CX-ypm1QP-n2EAI/review"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-primary underline underline-offset-2 hover:text-primary/80"
-      >
-        50 five-star ratings on Google ⭐
-      </a>
-    </p>
   </section>
 );
 
