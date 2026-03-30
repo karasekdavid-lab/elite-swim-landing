@@ -59,7 +59,7 @@ const steps = [
   { num: 4, text: <><strong>15-min call with Yul</strong> - personalized game plan for your swimmer</> },
 ];
 
-const STEP_LABELS = ["About You", "Your Swimmer", "WhatsApp"];
+const STEP_LABELS = ["Your Details", "Your Swimmer"];
 
 const FormSection = () => {
   const [formData, setFormData] = useState({
@@ -96,9 +96,9 @@ const FormSection = () => {
 
   const nextStep = async () => {
     await sendPartial();
-    setStep((s) => Math.min(s + 1, 3));
+    setStep(2);
   };
-  const prevStep = () => setStep((s) => Math.max(s - 1, 1));
+  const prevStep = () => setStep(1);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -124,7 +124,7 @@ const FormSection = () => {
     }
   };
 
-  const progressValue = (step / 3) * 100;
+  const progressValue = (step / 2) * 100;
 
   return (
     <section id="form" className="bg-gradient-to-b from-primary/5 to-background px-5 py-14 md:px-10 md:py-20">
@@ -176,21 +176,44 @@ const FormSection = () => {
                 </div>
                 <Progress value={progressValue} className="h-1.5" />
                 <p className="mt-3 text-center text-xs text-muted-foreground">
-                  Step {step} of 3 {step === 1 && "— Takes 60 seconds. Yul reviews every one personally."}
+                  Step {step} of 2 {step === 1 && "— Takes 60 seconds. Yul reviews every one personally."}
                 </p>
               </div>
 
               <form onSubmit={handleSubmit}>
-                {/* Step 1: Name & Email */}
+                {/* Step 1: Name, Email & WhatsApp */}
                 {step === 1 && (
                   <div className="space-y-4">
                     <h3 className="font-heading text-lg font-bold text-foreground text-center">Let's Get Started</h3>
                     <Field label="Your full name" name="parentName" type="text" placeholder="e.g. Sarah Johnson" value={formData.parentName} onChange={handleChange} />
                     <Field label="Email address" name="email" type="email" placeholder="your@email.com" value={formData.email} onChange={handleChange} />
+                    <div>
+                      <label className="mb-1 flex flex-wrap items-center gap-1.5 text-[13px] font-semibold text-foreground/80">
+                        <span>💬</span> WhatsApp number
+                      </label>
+                      <div className="flex gap-2">
+                        <select
+                          value={countryCode}
+                          onChange={(e) => setCountryCode(e.target.value)}
+                          className="w-[110px] shrink-0 rounded-lg border-2 border-border bg-muted px-2 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                        >
+                          {COUNTRY_CODES.map((c) => (
+                            <option key={c.code + c.name} value={c.code}>
+                              {c.flag} {c.code}
+                            </option>
+                          ))}
+                        </select>
+                        <input
+                          type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleChange}
+                          placeholder="7700 900123"
+                          className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                        />
+                      </div>
+                    </div>
                     <button
                       type="button"
                       onClick={nextStep}
-                      disabled={!formData.parentName.trim() || !formData.email.trim()}
+                      disabled={!formData.parentName.trim() || !formData.email.trim() || !formData.whatsapp.trim()}
                       className="mt-1 w-full rounded-lg bg-primary py-4 font-heading text-base font-bold text-primary-foreground shadow-[0_4px_16px_hsl(264_100%_50%/0.2)] transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
                     >
                       NEXT — TELL US ABOUT YOUR SWIMMER →
@@ -198,7 +221,7 @@ const FormSection = () => {
                   </div>
                 )}
 
-                {/* Step 2: Swimmer details */}
+                {/* Step 2: Swimmer details & submit */}
                 {step === 2 && (
                   <div className="space-y-4">
                     <h3 className="font-heading text-lg font-bold text-foreground text-center">About Your Swimmer</h3>
@@ -240,56 +263,8 @@ const FormSection = () => {
                         ← BACK
                       </button>
                       <button
-                        type="button"
-                        onClick={nextStep}
-                        disabled={!formData.swimmerAge.trim()}
-                        className="flex-1 rounded-lg bg-primary py-4 font-heading text-base font-bold text-primary-foreground shadow-[0_4px_16px_hsl(264_100%_50%/0.2)] transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
-                      >
-                        NEXT — LAST STEP →
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {/* Step 3: WhatsApp number */}
-                {step === 3 && (
-                  <div className="space-y-4">
-                    <h3 className="font-heading text-lg font-bold text-foreground text-center">Almost Done!</h3>
-                    <p className="text-center text-sm text-muted-foreground">This is how Yul's team will reach you within 5 minutes.</p>
-                    <div>
-                      <label className="mb-1 flex flex-wrap items-center gap-1.5 text-[13px] font-semibold text-foreground/80">
-                        <span>💬</span> WhatsApp number
-                      </label>
-                      <div className="flex gap-2">
-                        <select
-                          value={countryCode}
-                          onChange={(e) => setCountryCode(e.target.value)}
-                          className="w-[110px] shrink-0 rounded-lg border-2 border-border bg-muted px-2 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
-                        >
-                          {COUNTRY_CODES.map((c) => (
-                            <option key={c.code + c.name} value={c.code}>
-                              {c.flag} {c.code}
-                            </option>
-                          ))}
-                        </select>
-                        <input
-                          type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleChange}
-                          placeholder="7700 900123"
-                          className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex gap-3">
-                      <button
-                        type="button"
-                        onClick={prevStep}
-                        className="rounded-lg border-2 border-border px-5 py-4 font-heading text-sm font-bold text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
-                      >
-                        ← BACK
-                      </button>
-                      <button
                         type="submit"
-                        disabled={submitting || !formData.whatsapp.trim()}
+                        disabled={submitting || !formData.swimmerAge.trim()}
                         className="flex-1 rounded-lg bg-primary py-4 font-heading text-base font-bold text-primary-foreground shadow-[0_4px_16px_hsl(264_100%_50%/0.2)] transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
                       >
                         {submitting ? "SENDING..." : "SEND MY SWIMMER'S PROFILE TO YUL →"}
