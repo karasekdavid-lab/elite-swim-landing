@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const GHL_WEBHOOK_URL =
   "https://services.leadconnectorhq.com/hooks/6FMzWKJETHi9LlgCsxFy/webhook-trigger/c1e1b5a6-812f-43a3-a71c-f3b7f3877861";
@@ -113,6 +113,12 @@ const FormSection = () => {
       console.error("Partial webhook error:", err);
     }
   };
+
+  useEffect(() => {
+    const handleUnload = () => sendPartial(parentName, email);
+    window.addEventListener("beforeunload", handleUnload);
+    return () => window.removeEventListener("beforeunload", handleUnload);
+  }, [parentName, email]);
 
   const handleStep1Submit = (e: React.FormEvent) => {
     e.preventDefault();
