@@ -3,6 +3,55 @@ import { useState, useRef } from "react";
 const GHL_WEBHOOK_URL =
   "https://services.leadconnectorhq.com/hooks/6FMzWKJETHi9LlgCsxFy/webhook-trigger/c1e1b5a6-812f-43a3-a71c-f3b7f3877861";
 
+const COUNTRY_CODES = [
+  { code: "+44", flag: "🇬🇧", name: "UK" },
+  { code: "+1", flag: "🇺🇸", name: "US" },
+  { code: "+49", flag: "🇩🇪", name: "Germany" },
+  { code: "+33", flag: "🇫🇷", name: "France" },
+  { code: "+34", flag: "🇪🇸", name: "Spain" },
+  { code: "+39", flag: "🇮🇹", name: "Italy" },
+  { code: "+31", flag: "🇳🇱", name: "Netherlands" },
+  { code: "+32", flag: "🇧🇪", name: "Belgium" },
+  { code: "+41", flag: "🇨🇭", name: "Switzerland" },
+  { code: "+43", flag: "🇦🇹", name: "Austria" },
+  { code: "+45", flag: "🇩🇰", name: "Denmark" },
+  { code: "+46", flag: "🇸🇪", name: "Sweden" },
+  { code: "+47", flag: "🇳🇴", name: "Norway" },
+  { code: "+48", flag: "🇵🇱", name: "Poland" },
+  { code: "+40", flag: "🇷🇴", name: "Romania" },
+  { code: "+351", flag: "🇵🇹", name: "Portugal" },
+  { code: "+353", flag: "🇮🇪", name: "Ireland" },
+  { code: "+358", flag: "🇫🇮", name: "Finland" },
+  { code: "+30", flag: "🇬🇷", name: "Greece" },
+  { code: "+36", flag: "🇭🇺", name: "Hungary" },
+  { code: "+420", flag: "🇨🇿", name: "Czechia" },
+  { code: "+385", flag: "🇭🇷", name: "Croatia" },
+  { code: "+381", flag: "🇷🇸", name: "Serbia" },
+  { code: "+386", flag: "🇸🇮", name: "Slovenia" },
+  { code: "+421", flag: "🇸🇰", name: "Slovakia" },
+  { code: "+359", flag: "🇧🇬", name: "Bulgaria" },
+  { code: "+90", flag: "🇹🇷", name: "Turkey" },
+  { code: "+972", flag: "🇮🇱", name: "Israel" },
+  { code: "+971", flag: "🇦🇪", name: "UAE" },
+  { code: "+61", flag: "🇦🇺", name: "Australia" },
+  { code: "+64", flag: "🇳🇿", name: "New Zealand" },
+  { code: "+27", flag: "🇿🇦", name: "South Africa" },
+  { code: "+55", flag: "🇧🇷", name: "Brazil" },
+  { code: "+52", flag: "🇲🇽", name: "Mexico" },
+  { code: "+81", flag: "🇯🇵", name: "Japan" },
+  { code: "+82", flag: "🇰🇷", name: "South Korea" },
+  { code: "+86", flag: "🇨🇳", name: "China" },
+  { code: "+91", flag: "🇮🇳", name: "India" },
+  { code: "+65", flag: "🇸🇬", name: "Singapore" },
+  { code: "+60", flag: "🇲🇾", name: "Malaysia" },
+  { code: "+63", flag: "🇵🇭", name: "Philippines" },
+  { code: "+7", flag: "🇷🇺", name: "Russia" },
+  { code: "+380", flag: "🇺🇦", name: "Ukraine" },
+  { code: "+20", flag: "🇪🇬", name: "Egypt" },
+  { code: "+234", flag: "🇳🇬", name: "Nigeria" },
+  { code: "+254", flag: "🇰🇪", name: "Kenya" },
+];
+
 const steps = [
   {
     num: 1,
@@ -41,8 +90,11 @@ const steps = [
 const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
 const FormSection = () => {
+  const [step, setStep] = useState(1);
   const [parentName, setParentName] = useState("");
   const [email, setEmail] = useState("");
+  const [countryCode, setCountryCode] = useState("+44");
+  const [whatsapp, setWhatsapp] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const hasSentPartial = useRef(false);
 
@@ -62,23 +114,36 @@ const FormSection = () => {
     }
   };
 
-  const handleEmailBlur = () => {
-    sendPartial(parentName, email);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleStep1Submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!parentName.trim() || !isValidEmail(email)) return;
+    sendPartial(parentName, email);
+    setStep(2);
+  };
+
+  const handleStep2Submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!whatsapp.trim()) return;
     setSubmitting(true);
     try {
       await fetch(GHL_WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         keepalive: true,
-        body: JSON.stringify({ parentName, email, partial: false }),
+        body: JSON.stringify({
+          parentName,
+          email,
+          whatsapp: `${countryCode}${whatsapp}`,
+          partial: false,
+        }),
       });
-      sessionStorage.setItem("sp_lead", JSON.stringify({ parentName, email }));
-      window.location.href = "/successful";
+      const params = new URLSearchParams({ name: parentName, email });
+      const url = `https://www.swimpros.com/successful?${params}`;
+      if (window.top) {
+        window.top.location.href = url;
+      } else {
+        window.location.href = url;
+      }
     } catch (err) {
       console.error("Webhook error:", err);
       alert("Something went wrong. Please try again.");
@@ -90,6 +155,7 @@ const FormSection = () => {
   return (
     <section id="form" className="bg-gradient-to-b from-primary/5 to-background px-5 py-14 md:px-10 md:py-20">
       <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2 md:items-start">
+        {/* Left side */}
         <div>
           <span className="mb-3 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary">
             Free Assessment
@@ -114,43 +180,103 @@ const FormSection = () => {
           </div>
         </div>
 
+        {/* Form card */}
         <div className="rounded-2xl border-2 border-primary/15 bg-background p-7 shadow-[0_4px_30px_hsl(264_100%_50%/0.07),0_1px_3px_hsl(0_0%_0%/0.04)]">
-          <h3 className="mb-6 font-heading text-lg font-bold text-foreground text-center">
-            Get Your Free Swimmer Assessment
-          </h3>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="mb-1 block text-[13px] font-semibold text-foreground/80">Your full name</label>
-              <input
-                type="text"
-                value={parentName}
-                onChange={(e) => setParentName(e.target.value)}
-                placeholder="e.g. Sarah Johnson"
-                className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
-              />
-            </div>
-            <div>
-              <label className="mb-1 block text-[13px] font-semibold text-foreground/80">Email address</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onBlur={handleEmailBlur}
-                placeholder="your@email.com"
-                className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={submitting || !parentName.trim() || !isValidEmail(email)}
-              className="mt-1 w-full rounded-lg bg-primary py-4 font-heading text-base font-bold text-primary-foreground shadow-[0_4px_16px_hsl(264_100%_50%/0.2)] transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
-            >
-              {submitting ? "SENDING..." : "GET MY FREE ASSESSMENT →"}
-            </button>
-            <p className="text-center text-[11px] text-muted-foreground">
-              No spam. No pressure. Just a coaching conversation about your swimmer.
-            </p>
-          </form>
+
+          {/* Step indicator */}
+          <div className="mb-5 flex items-center justify-center gap-2">
+            <div className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold ${step === 1 ? "bg-primary text-primary-foreground" : "bg-primary/20 text-primary"}`}>1</div>
+            <div className={`h-px w-10 ${step === 2 ? "bg-primary" : "bg-border"}`} />
+            <div className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold ${step === 2 ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}>2</div>
+          </div>
+
+          {step === 1 ? (
+            <>
+              <h3 className="mb-6 font-heading text-lg font-bold text-foreground text-center">
+                Get Your Free Swimmer Assessment
+              </h3>
+              <form onSubmit={handleStep1Submit} className="space-y-4">
+                <div>
+                  <label className="mb-1 block text-[13px] font-semibold text-foreground/80">Your full name</label>
+                  <input
+                    type="text"
+                    value={parentName}
+                    onChange={(e) => setParentName(e.target.value)}
+                    placeholder="e.g. Sarah Johnson"
+                    className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="mb-1 block text-[13px] font-semibold text-foreground/80">Email address</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onBlur={() => sendPartial(parentName, email)}
+                    placeholder="your@email.com"
+                    className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={!parentName.trim() || !isValidEmail(email)}
+                  className="mt-1 w-full rounded-lg bg-primary py-4 font-heading text-base font-bold text-primary-foreground shadow-[0_4px_16px_hsl(264_100%_50%/0.2)] transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
+                >
+                  NEXT →
+                </button>
+                <p className="text-center text-[11px] text-muted-foreground">
+                  No spam. No pressure. Just a coaching conversation about your swimmer.
+                </p>
+              </form>
+            </>
+          ) : (
+            <>
+              <h3 className="mb-2 font-heading text-lg font-bold text-foreground text-center">
+                One last thing, {parentName.split(" ")[0]}
+              </h3>
+              <p className="mb-5 text-center text-[13px] text-muted-foreground">
+                What's the best WhatsApp number for Yul's team to reach you?
+              </p>
+              <form onSubmit={handleStep2Submit} className="space-y-4">
+                <div>
+                  <label className="mb-1 flex items-center gap-1.5 text-[13px] font-semibold text-foreground/80">
+                    <span>💬</span> WhatsApp number
+                  </label>
+                  <div className="flex gap-2">
+                    <select
+                      value={countryCode}
+                      onChange={(e) => setCountryCode(e.target.value)}
+                      className="w-[110px] shrink-0 rounded-lg border-2 border-border bg-muted px-2 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                    >
+                      {COUNTRY_CODES.map((c) => (
+                        <option key={c.code + c.name} value={c.code}>
+                          {c.flag} {c.code}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      type="tel"
+                      value={whatsapp}
+                      onChange={(e) => setWhatsapp(e.target.value)}
+                      placeholder="7700 900123"
+                      autoFocus
+                      className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  disabled={submitting || !whatsapp.trim()}
+                  className="w-full rounded-lg bg-primary py-4 font-heading text-base font-bold text-primary-foreground shadow-[0_4px_16px_hsl(264_100%_50%/0.2)] transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
+                >
+                  {submitting ? "SENDING..." : "SEND MY DETAILS TO YUL →"}
+                </button>
+                <p className="text-center text-[11px] text-muted-foreground">
+                  No spam. No pressure. Just a coaching conversation about your swimmer.
+                </p>
+              </form>
+            </>
+          )}
         </div>
       </div>
     </section>
