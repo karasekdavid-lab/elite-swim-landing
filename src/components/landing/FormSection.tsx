@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 
 const GHL_WEBHOOK_URL =
   "https://services.leadconnectorhq.com/hooks/6FMzWKJETHi9LlgCsxFy/webhook-trigger/c1e1b5a6-812f-43a3-a71c-f3b7f3877861";
@@ -97,34 +97,10 @@ const FormSection = () => {
   const [countryCode, setCountryCode] = useState("+44");
   const [whatsapp, setWhatsapp] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const hasSentPartial = useRef(false);
-
-  const sendPartial = async (first: string, last: string, emailVal: string) => {
-    if (hasSentPartial.current) return;
-    if (!first.trim() || !isValidEmail(emailVal)) return;
-    hasSentPartial.current = true;
-    try {
-      await fetch(GHL_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        keepalive: true,
-        body: JSON.stringify({ firstName: first, lastName: last, email: emailVal, partial: true }),
-      });
-    } catch (err) {
-      console.error("Partial webhook error:", err);
-    }
-  };
-
-  useEffect(() => {
-    const handleUnload = () => sendPartial(firstName, lastName, email);
-    window.addEventListener("beforeunload", handleUnload);
-    return () => window.removeEventListener("beforeunload", handleUnload);
-  }, [firstName, lastName, email]);
 
   const handleStep1Submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!firstName.trim() || !isValidEmail(email)) return;
-    sendPartial(firstName, lastName, email);
     setStep(2);
   };
 
@@ -232,7 +208,6 @@ const FormSection = () => {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    onBlur={() => sendPartial(firstName, lastName, email)}
                     placeholder="your@email.com"
                     className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
                   />
