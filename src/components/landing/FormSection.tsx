@@ -193,7 +193,7 @@ const FormSection = () => {
           {step === 1 ? (
             <>
               <h3 className="mb-6 font-heading text-lg font-bold text-foreground text-center">
-                Get Your Free Swimmer Assessment
+                Get Your Free Swimmer Assessment & Camp Details
               </h3>
               <form onSubmit={handleStep1Submit} className="space-y-4">
                 <div>
