@@ -91,23 +91,24 @@ const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 
 const FormSection = () => {
   const [step, setStep] = useState(1);
-  const [parentName, setParentName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [countryCode, setCountryCode] = useState("+44");
   const [whatsapp, setWhatsapp] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const hasSentPartial = useRef(false);
 
-  const sendPartial = async (name: string, emailVal: string) => {
+  const sendPartial = async (first: string, last: string, emailVal: string) => {
     if (hasSentPartial.current) return;
-    if (!name.trim() || !isValidEmail(emailVal)) return;
+    if (!first.trim() || !isValidEmail(emailVal)) return;
     hasSentPartial.current = true;
     try {
       await fetch(GHL_WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         keepalive: true,
-        body: JSON.stringify({ parentName: name, email: emailVal, partial: true }),
+        body: JSON.stringify({ firstName: first, lastName: last, email: emailVal, partial: true }),
       });
     } catch (err) {
       console.error("Partial webhook error:", err);
@@ -115,15 +116,15 @@ const FormSection = () => {
   };
 
   useEffect(() => {
-    const handleUnload = () => sendPartial(parentName, email);
+    const handleUnload = () => sendPartial(firstName, lastName, email);
     window.addEventListener("beforeunload", handleUnload);
     return () => window.removeEventListener("beforeunload", handleUnload);
-  }, [parentName, email]);
+  }, [firstName, lastName, email]);
 
   const handleStep1Submit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!parentName.trim() || !isValidEmail(email)) return;
-    sendPartial(parentName, email);
+    if (!firstName.trim() || !isValidEmail(email)) return;
+    sendPartial(firstName, lastName, email);
     setStep(2);
   };
 
@@ -137,13 +138,14 @@ const FormSection = () => {
         headers: { "Content-Type": "application/json" },
         keepalive: true,
         body: JSON.stringify({
-          parentName,
+          firstName,
+          lastName,
           email,
           whatsapp: `${countryCode}${whatsapp}`,
           partial: false,
         }),
       });
-      const params = new URLSearchParams({ name: parentName, email });
+      const params = new URLSearchParams({ name: `${firstName} ${lastName}`.trim(), email });
       const url = `https://www.swimpros.com/successful?${params}`;
       if (window.top) {
         window.top.location.href = url;
@@ -202,15 +204,27 @@ const FormSection = () => {
                 Get Your Free Swimmer Assessment & Camp Details
               </h3>
               <form onSubmit={handleStep1Submit} className="space-y-4">
-                <div>
-                  <label className="mb-1 block text-[13px] font-semibold text-foreground/80">Your full name</label>
-                  <input
-                    type="text"
-                    value={parentName}
-                    onChange={(e) => setParentName(e.target.value)}
-                    placeholder="e.g. Sarah Johnson"
-                    className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
-                  />
+                <div className="flex gap-3">
+                  <div className="flex-1">
+                    <label className="mb-1 block text-[13px] font-semibold text-foreground/80">First name</label>
+                    <input
+                      type="text"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      placeholder="Sarah"
+                      className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="mb-1 block text-[13px] font-semibold text-foreground/80">Last name</label>
+                    <input
+                      type="text"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      placeholder="Johnson"
+                      className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
+                    />
+                  </div>
                 </div>
                 <div>
                   <label className="mb-1 block text-[13px] font-semibold text-foreground/80">Email address</label>
@@ -218,14 +232,14 @@ const FormSection = () => {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    onBlur={() => sendPartial(parentName, email)}
+                    onBlur={() => sendPartial(firstName, lastName, email)}
                     placeholder="your@email.com"
                     className="w-full rounded-lg border-2 border-border bg-muted px-3.5 py-3 font-body text-base text-foreground focus:border-primary focus:bg-background focus:outline-none"
                   />
                 </div>
                 <button
                   type="submit"
-                  disabled={!parentName.trim() || !isValidEmail(email)}
+                  disabled={!firstName.trim() || !isValidEmail(email)}
                   className="mt-1 w-full rounded-lg bg-primary py-4 font-heading text-base font-bold text-primary-foreground shadow-[0_4px_16px_hsl(264_100%_50%/0.2)] transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100"
                 >
                   NEXT →
@@ -238,7 +252,7 @@ const FormSection = () => {
           ) : (
             <>
               <h3 className="mb-2 font-heading text-lg font-bold text-foreground text-center">
-                One last thing, {parentName.split(" ")[0]}
+                One last thing, {firstName}
               </h3>
               <p className="mb-5 text-center text-[13px] text-muted-foreground">
                 What's the best WhatsApp number for Yul's team to reach you?
