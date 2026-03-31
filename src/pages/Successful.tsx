@@ -87,7 +87,7 @@ const Successful = () => {
         }),
       });
       sessionStorage.removeItem("sp_lead");
-      setDone(true);
+      window.top ? window.top.location.href = "https://www.swimpros.com/successful" : window.location.href = "https://www.swimpros.com/successful";
     } catch (err) {
       console.error("Webhook error:", err);
       alert("Something went wrong. Please try again.");
